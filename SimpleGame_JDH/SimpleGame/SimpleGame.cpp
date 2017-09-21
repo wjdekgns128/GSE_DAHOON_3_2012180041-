@@ -14,16 +14,25 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\freeglut.h"
 
 #include "Renderer.h"
-
+#include "Object.h"
 Renderer *g_Renderer = NULL;
-
+Object*  b = NULL;
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 
+	
 	// Renderer Test
-	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
+	MyVector v;
+	float c[4];
+	float s;
+
+	b->getVector(v);
+	b->getSize(s);
+	b->getRGBA(c[0], c[1], c[2], c[3]);
+	
+	g_Renderer->DrawSolidRect(v.x,v.y,v.z,s,c[0],c[1],c[2],c[3]);
 
 	glutSwapBuffers();
 }
@@ -73,7 +82,7 @@ int main(int argc, char **argv)
 	{
 		std::cout << "Renderer could not be initialized.. \n";
 	}
-
+	b = new Object(MyVector(100, 100, 100), 100, 1, 0, 1, 1);
 	glutDisplayFunc(RenderScene);
 	glutIdleFunc(Idle);
 	glutKeyboardFunc(KeyInput);
@@ -83,7 +92,7 @@ int main(int argc, char **argv)
 	glutMainLoop();
 
 	delete g_Renderer;
-
+	delete b;
     return 0;
 }
 
