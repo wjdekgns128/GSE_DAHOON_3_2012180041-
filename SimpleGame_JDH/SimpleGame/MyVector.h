@@ -34,11 +34,26 @@ public:
 
 	}
 #pragma region Vector operator
+	
 	MyVector& operator+(const MyVector& m)
 	{
 		x += m.x;
 		y += m.y;
 		z += m.z;
+		return *this;
+	}
+	MyVector& operator*(const MyVector& m)
+	{
+		x *= m.x;
+		y *= m.y;
+		z *= m.z;
+		return *this;
+	}
+	MyVector& operator*(const float m)
+	{
+		x *= m;
+		y *= m;
+		z *= m;
 		return *this;
 	}
 	MyVector& operator-(const MyVector& m)
@@ -53,6 +68,12 @@ public:
 		x += m.x;
 		y += m.y;
 		z += m.z;
+	}
+	void operator*=(const MyVector& m)
+	{
+		x *= m.x;
+		y *= m.y;
+		z *= m.z;
 	}
 	void operator-=(const MyVector& m)
 	{

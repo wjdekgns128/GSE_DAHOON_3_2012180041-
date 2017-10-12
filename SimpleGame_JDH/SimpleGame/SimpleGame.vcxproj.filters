@@ -22,6 +22,9 @@
     <Filter Include="소스 파일\My">
       <UniqueIdentifier>{dd266f73-b862-4483-b03b-440cef70594d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\My\Object">
+      <UniqueIdentifier>{557470d6-2d9a-4c87-8073-d2e6eac691bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -39,8 +42,11 @@
     <ClInclude Include="MyVector.h">
       <Filter>헤더 파일\My</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
+    <ClInclude Include="BaseObject.h">
       <Filter>헤더 파일\My</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>헤더 파일\My\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>헤더 파일\My\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

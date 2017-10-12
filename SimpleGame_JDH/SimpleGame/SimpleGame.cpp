@@ -16,23 +16,25 @@ but WITHOUT ANY WARRANTY.
 #include "Renderer.h"
 #include "Object.h"
 Renderer *g_Renderer = NULL;
-Object*  b = NULL;
+int Count = 0;
+Object*  b[100];
+
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 
 	
-	// Renderer Test
-	MyVector v;
-	float c[4];
-	float s;
 
-	b->getVector(v);
-	b->getSize(s);
-	b->getRGBA(c[0], c[1], c[2], c[3]);
-	
-	g_Renderer->DrawSolidRect(v.x,v.y,v.z,s,c[0],c[1],c[2],c[3]);
+	// Renderer Test
+	for (int i = 0; i < Count; ++i)
+	{
+		if (b[i] != NULL)
+		{
+			b[i]->Render(g_Renderer);
+			b[i]->Update();
+		}
+	}
 
 	glutSwapBuffers();
 }
@@ -44,6 +46,25 @@ void Idle(void)
 
 void MouseInput(int button, int state, int x, int y)
 {
+	static bool c = false;
+	if ((button == GLUT_LEFT_BUTTON))
+	{
+		if (state == GLUT_DOWN)
+			c = true;
+		if (state == GLUT_UP)
+		{
+			if (c)
+			{
+				if (b[Count] == NULL)
+				{
+					b[Count++] = new Object(MyVector(x - 250, 250 - y, 0), 10, 1, 1, 1, 1, 1);
+				}
+				c = false;
+			}
+		}
+
+	}
+
 	RenderScene();
 }
 
@@ -75,24 +96,26 @@ int main(int argc, char **argv)
 	{
 		std::cout << "GLEW 3.0 not supported\n ";
 	}
-
+	for (int i = 0; i < 100; ++i)
+		b[i] = NULL;
 	// Initialize Renderer
 	g_Renderer = new Renderer(500, 500);
 	if (!g_Renderer->IsInitialized())
 	{
 		std::cout << "Renderer could not be initialized.. \n";
 	}
-	b = new Object(MyVector(100, 100, 100), 100, 1, 0, 1, 1);
 	glutDisplayFunc(RenderScene);
 	glutIdleFunc(Idle);
 	glutKeyboardFunc(KeyInput);
 	glutMouseFunc(MouseInput);
 	glutSpecialFunc(SpecialKeyInput);
-
 	glutMainLoop();
-
 	delete g_Renderer;
-	delete b;
+	for (int i = 0; i < Count; ++i)
+	{
+		if (b[i] != NULL)
+			delete b[i];
+	}
     return 0;
 }
 
