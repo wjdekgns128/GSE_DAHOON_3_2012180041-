@@ -4,14 +4,27 @@
 SceneMgr::SceneMgr()
 {
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+		b[i] = NULL;
+}
+SceneMgr::~SceneMgr()
+{
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+	{
+		if (b[i] != NULL)
+			delete b[i];
+	}
+}
+void SceneMgr::Init()
+{
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		float TempSpeed = 3 - rand() % 6;
-		TempSpeed == 0 ? TempSpeed =1 : TempSpeed= TempSpeed;
-		b[i] = new Object(MyVector( rand()%500 - 250,rand()%500 - 250, 0), 10, 1, 1, 1, 1, TempSpeed);
+		TempSpeed == 0 ? TempSpeed = 1 : TempSpeed = TempSpeed;
+		b[i] = new Object(MyVector(rand() % 500 - 250, rand() % 500 - 250, 0), 10, 1, 1, 1, 1, TempSpeed);
 
 	}
 }
-SceneMgr::~SceneMgr()
+void SceneMgr::Destory()
 {
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
@@ -50,23 +63,7 @@ void SceneMgr::TestColl()
 		{
 			if (i == j)
 				continue;
-		/*	float left = 250 + b[i]->getVector().x - 0.5f;
-			float right = 250 + b[i]->getVector().x + 0.5f;
-			float top = 250 + b[i]->getVector().y + 0.5f;
-			float bom = 250 + b[i]->getVector().y - 0.5f;
-			float left1 = 250 + b[j]->getVector().x - 0.5f;
-			float right1 = 250 + b[j]->getVector().x + 0.5f;
-			float top1 = 250 + b[j]->getVector().y + 0.5f;
-			float bom1 = 250 + b[j]->getVector().y - 0.5f;
-		
-			if (left < right1  && top < bom1 && right > left1 && bom > top1)
-			{
-				b[i]->setRGBA(1, 0, 0, 1);
-				b[j]->setRGBA(1, 0, 0, 1);
-				return;
-			}*/
-			float  l = sqrt(pow(b[i]->getVector().x - b[j]->getVector().x, 2) + pow(b[i]->getVector().y - b[j]->getVector().y, 2));
-			if (l <= b[i]->getSize()+1.5f)
+			if (BoxToBoxColl(b[i]->getVector().x, b[i]->getVector().y, b[i]->getSize(), b[i]->getSize(), b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize()))
 			{
 				b[i]->setRGBA(1, 0, 0, 1);
 				b[j]->setRGBA(1, 0, 0, 1);
@@ -77,6 +74,13 @@ void SceneMgr::TestColl()
 				b[i]->setRGBA(1, 1, 1, 1);
 				b[j]->setRGBA(1, 1, 1, 1);
 			}
+		
+	
 		}
 	}
+}
+bool SceneMgr::BoxToBoxColl(float x, float y, float w, float h, float x1, float y1, float w1, float h1)
+{
+	return x + w >=x1 && x <= x1+w1
+		&&  y + h>=y1 &&y <= y1 + h1;
 }

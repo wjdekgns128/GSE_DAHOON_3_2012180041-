@@ -17,8 +17,6 @@ but WITHOUT ANY WARRANTY.
 #include   "SceneMgr.h"
 Renderer *g_Renderer = NULL;
 SceneMgr* g_pMgr = NULL;
-
-
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -74,6 +72,7 @@ int main(int argc, char **argv)
 	if (g_pMgr == NULL)
 	{
 		g_pMgr = new SceneMgr;
+		g_pMgr->Init();
 	}
 
 	// Initialize Renderer
@@ -89,7 +88,7 @@ int main(int argc, char **argv)
 	glutSpecialFunc(SpecialKeyInput);
 	glutMainLoop();
 	delete g_Renderer;
-
+	delete g_pMgr;
     return 0;
 }
 
