@@ -25,6 +25,15 @@
     <Filter Include="헤더 파일\My\Object">
       <UniqueIdentifier>{557470d6-2d9a-4c87-8073-d2e6eac691bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\My\Object">
+      <UniqueIdentifier>{c4c9b99b-13ff-45f6-a2c7-b3edb179f281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\My\SceneMgr">
+      <UniqueIdentifier>{6891666c-d32e-4081-bc5d-e239bef4a6aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\My\SceneMgr">
+      <UniqueIdentifier>{f82b2e7c-2931-416c-8b07-3be0d92d5310}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -48,6 +57,9 @@
     <ClInclude Include="Object.h">
       <Filter>헤더 파일\My\Object</Filter>
     </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>헤더 파일\My\SceneMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,7 +72,10 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>헤더 파일\My\Object</Filter>
+      <Filter>소스 파일\My\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>소스 파일\My\SceneMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

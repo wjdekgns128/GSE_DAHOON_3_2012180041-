@@ -4,9 +4,18 @@
 void Object::Update()
 {
 	
-
-	MyVector m(-0.7,-0.1, 0); // 방향백터
+	MyVector m(tempx,tempy, 0); // 방향백터
 	vector = vector + (m * Speed * 1); // 시간
+
+	if (vector.x <= -249 || vector.x >=249)
+	{
+		tempx *= -1;
+	}
+	if (vector.y <= -249 || vector.y >= 249)
+	{
+		tempy *= -1;
+	}
+
 }
 void Object::Render(Renderer* p)
 {
