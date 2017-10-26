@@ -13,19 +13,15 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
 
-#include "Renderer.h"
 #include   "SceneMgr.h"
-Renderer *g_Renderer = NULL;
 SceneMgr* g_pMgr = NULL;
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
-	g_pMgr->Render(g_Renderer);
+	g_pMgr->Render();
 	g_pMgr->Update();
 	// Renderer Test
-	
-
 	glutSwapBuffers();
 }
 
@@ -59,7 +55,6 @@ int main(int argc, char **argv)
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(500, 500);
 	glutCreateWindow("Game Software Engineering KPU");
-
 	glewInit();
 	if (glewIsSupported("GL_VERSION_3_0"))
 	{
@@ -76,18 +71,13 @@ int main(int argc, char **argv)
 	}
 
 	// Initialize Renderer
-	g_Renderer = new Renderer(500, 500);
-	if (!g_Renderer->IsInitialized())
-	{
-		std::cout << "Renderer could not be initialized.. \n";
-	}
+	
 	glutDisplayFunc(RenderScene);
 	glutIdleFunc(Idle);
 	glutKeyboardFunc(KeyInput);
 	glutMouseFunc(MouseInput);
 	glutSpecialFunc(SpecialKeyInput);
 	glutMainLoop();
-	delete g_Renderer;
 	delete g_pMgr;
     return 0;
 }

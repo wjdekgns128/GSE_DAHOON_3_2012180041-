@@ -5,6 +5,8 @@
 class SceneMgr
 {
 private:
+	Renderer *g_Renderer;
+
 	Object*  b[MAX_OBJECT__COUNT];
 public:
 	SceneMgr();
@@ -14,7 +16,7 @@ public:
 	void Destory();
 public:
 	void Update();
-	void Render(Renderer* pr);
+	void Render();
 
 	void TestColl();
 
