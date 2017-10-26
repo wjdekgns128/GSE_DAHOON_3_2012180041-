@@ -34,6 +34,9 @@
     <Filter Include="헤더 파일\My\SceneMgr">
       <UniqueIdentifier>{f82b2e7c-2931-416c-8b07-3be0d92d5310}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\My\Define">
+      <UniqueIdentifier>{652818a6-669f-419d-9ecb-69e7cce22eab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -59,6 +62,9 @@
     </ClInclude>
     <ClInclude Include="SceneMgr.h">
       <Filter>헤더 파일\My\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDefine.h">
+      <Filter>헤더 파일\My\Define</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

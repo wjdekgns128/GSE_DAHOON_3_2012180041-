@@ -7,22 +7,26 @@ it under the terms of the What The Hell License. Do it plz.
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY.
 */
-
 #include "stdafx.h"
+#include <Windows.h>
 #include <iostream>
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
 
 #include   "SceneMgr.h"
 SceneMgr* g_pMgr = NULL;
+DWORD timer = timeGetTime();
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 	g_pMgr->Render();
-	g_pMgr->Update();
+	g_pMgr->Update(timeGetTime() - timer);
+	timer = timeGetTime();
+
 	// Renderer Test
 	glutSwapBuffers();
+
 }
 
 void Idle(void)
@@ -33,7 +37,7 @@ void Idle(void)
 void MouseInput(int button, int state, int x, int y)
 {
 	
-
+	g_pMgr->Mouse(button, state, x, y);
 	RenderScene();
 }
 

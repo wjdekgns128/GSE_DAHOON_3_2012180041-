@@ -5,38 +5,22 @@ SceneMgr::SceneMgr()
 {
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 		b[i] = NULL;
-	g_Renderer = NULL;
+	SceneRenderer = NULL;
 }
 SceneMgr::~SceneMgr()
 {
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-	{
-		if (b[i] != NULL)
-		{
-			b[i] = NULL;
-			delete b[i];
-
-		}
-	}
-	if (g_Renderer != NULL)
-	{
-		delete g_Renderer;
-		g_Renderer = NULL;
-	}
+		SAFE_DELETE(b[i]);
+	SAFE_DELETE(SceneRenderer);
 
 }
 void SceneMgr::Init()
 {
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+
+	if (SceneRenderer == NULL)
 	{
-		float TempSpeed = 3 - rand() % 6;
-		TempSpeed == 0 ? TempSpeed = 1 : TempSpeed = TempSpeed;
-		b[i] = new Object(MyVector(rand() % 500 - 250, rand() % 500 - 250, 0), 10, 1, 1, 1, 1, TempSpeed);
-	}
-	if (g_Renderer == NULL)
-	{
-		g_Renderer = new Renderer(500, 500);
-		if (!g_Renderer->IsInitialized())
+		SceneRenderer = new Renderer(500, 500);
+		if (!SceneRenderer->IsInitialized())
 		{
 			std::cout << "Renderer could not be initialized.. \n";
 		}
@@ -45,30 +29,26 @@ void SceneMgr::Init()
 void SceneMgr::Destory()
 {
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-	{
-		if (b[i] != NULL)
-		{
-			delete b[i];
-			b[i] = NULL;
-		}
-	}
-	if (g_Renderer != NULL)
-	{
-		delete g_Renderer;
-		g_Renderer = NULL;
-	}
+		SAFE_DELETE(b[i]);
+	SAFE_DELETE(SceneRenderer);
 
 }
-void SceneMgr::Update()
+void SceneMgr::Update(DWORD ElapsedTime)
 {
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (b[i] != NULL)
 		{
-			b[i]->Update();
+			b[i]->Update(ElapsedTime);
+			if (b[i]->getState() == 2)
+			{
+				SAFE_DELETE(b[i]);
+			}
 		}
+
 	}
 	TestColl();
+
 
 }
 void SceneMgr::Render()
@@ -77,7 +57,7 @@ void SceneMgr::Render()
 	{
 		if (b[i] != NULL)
 		{
-			b[i]->Render(g_Renderer);
+			b[i]->Render(SceneRenderer);
 		}
 	}
 
@@ -88,12 +68,15 @@ void SceneMgr::TestColl()
 	{
 		for (int j = 0; j < MAX_OBJECT__COUNT; ++j)
 		{
-			if (i == j)
+			if (b[i] == NULL || b[j] == NULL || i == j)
 				continue;
 			if (BoxToBoxColl(b[i]->getVector().x, b[i]->getVector().y, b[i]->getSize(), b[i]->getSize(), b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize()))
 			{
 				b[i]->setRGBA(1, 0, 0, 1);
 				b[j]->setRGBA(1, 0, 0, 1);
+				b[i]->CollByObject(0.1f);
+				b[j]->CollByObject(0.1f);
+
 				return;
 			}
 			else
@@ -101,13 +84,35 @@ void SceneMgr::TestColl()
 				b[i]->setRGBA(1, 1, 1, 1);
 				b[j]->setRGBA(1, 1, 1, 1);
 			}
-		
-	
+
+
 		}
 	}
 }
 bool SceneMgr::BoxToBoxColl(float x, float y, float w, float h, float x1, float y1, float w1, float h1)
 {
-	return x + w >=x1 && x <= x1+w1
-		&&  y + h>=y1 &&y <= y1 + h1;
+	return x + w >= x1 && x <= x1 + w1
+		&&  y + h >= y1 &&y <= y1 + h1;
+}
+void SceneMgr::Mouse(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON)
+	{
+		if (state == GLUT_UP)
+		{
+			for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+			{
+				if (b[i] == NULL)
+				{
+					float TempSpeed = 3 - rand() % 6;
+					TempSpeed == 0 ? TempSpeed = 100 : TempSpeed = TempSpeed * 500;
+					b[i] = new Object(MyVector(x - 250, 250 - y, 0), 20, 1, 1, 1, 1, TempSpeed);
+					break;
+
+				}
+			}
+
+		}
+	}
+
 }

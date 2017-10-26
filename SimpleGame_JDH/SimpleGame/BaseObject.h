@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 #include "MyVector.h"
 #include "Renderer.h"
 class  BaseObject
@@ -7,6 +8,11 @@ protected:
 	MyVector vector;
 	float r, g, b, a;
 	float Speed;
+	float life;
+	float lifeTime;
+
+
+	int   state;
 public:
 	BaseObject(MyVector v,  float r, float g, float b, float a,float Speed) : vector(v), r(r), g(g), b(b), a(a),Speed(Speed)
 	{
@@ -24,7 +30,7 @@ public:
 	{
 
 	}
-	virtual void Update() = 0;
+	virtual void Update(DWORD timer) = 0;
 	virtual void Render(Renderer* p) = 0;
 public:
 #pragma region get,set
@@ -69,6 +75,14 @@ public:
 		g = _g;
 		b = _b;
 		a = _a;
+	}
+	int getState()
+	{
+		return state;
+	}
+	float getLife()
+	{
+		return life;
 	}
 
 #pragma endregion
