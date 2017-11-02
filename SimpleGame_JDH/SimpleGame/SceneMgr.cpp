@@ -71,7 +71,7 @@ void SceneMgr::TestCollByBullet()
 	{
 		for (int j = 0; j < MAX_OBJECT__COUNT; j++)
 		{
-			if (Temp[i] != NULL && b[j] != NULL)
+			if (Temp != NULL && Temp[i] != NULL && b[j] != NULL)
 			{
 				if (b[j]->getType() == OBJECTTYPE::CHARACHTER)
 				{
