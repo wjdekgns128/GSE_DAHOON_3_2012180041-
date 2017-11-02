@@ -57,14 +57,20 @@
     <ClInclude Include="BaseObject.h">
       <Filter>헤더 파일\My</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>헤더 파일\My\Object</Filter>
-    </ClInclude>
     <ClInclude Include="SceneMgr.h">
       <Filter>헤더 파일\My\SceneMgr</Filter>
     </ClInclude>
     <ClInclude Include="MyDefine.h">
       <Filter>헤더 파일\My\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>헤더 파일\My\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>헤더 파일\My\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>헤더 파일\My\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,11 +83,17 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>소스 파일\My\Object</Filter>
-    </ClCompile>
     <ClCompile Include="SceneMgr.cpp">
       <Filter>소스 파일\My\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>소스 파일\My\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>소스 파일\My\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>소스 파일\My\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

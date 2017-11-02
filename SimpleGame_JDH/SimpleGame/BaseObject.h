@@ -2,19 +2,21 @@
 #include <Windows.h>
 #include "MyVector.h"
 #include "Renderer.h"
+#include "MyDefine.h"
 class  BaseObject
 {
 protected:
+	float			size;
 	MyVector vector;
 	float r, g, b, a;
 	float Speed;
 	float life;
 	float lifeTime;
-
+	OBJECTTYPE type;
 
 	int   state;
 public:
-	BaseObject(MyVector v,  float r, float g, float b, float a,float Speed) : vector(v), r(r), g(g), b(b), a(a),Speed(Speed)
+	BaseObject(MyVector v,  float r, float g, float b, float a,float Speed,OBJECTTYPE type,float life) : vector(v), r(r), g(g), b(b), a(a),Speed(Speed), type(type),life(life)
 	{
 
 	}
@@ -32,6 +34,7 @@ public:
 	}
 	virtual void Update(DWORD timer) = 0;
 	virtual void Render(Renderer* p) = 0;
+	virtual void CollByObject(float down) = 0;
 public:
 #pragma region get,set
 	void setVector(const MyVector& _v)
@@ -80,10 +83,32 @@ public:
 	{
 		return state;
 	}
+	void setState(int s)
+	{
+		state = s;
+	}
 	float getLife()
 	{
 		return life;
 	}
+	OBJECTTYPE getType()
+	{
+		return type;
+	}
+#pragma endregion
 
+#pragma region get,set
+	float getSize()
+	{
+		return size;
+	}
+	void getSize(float& _size)
+	{
+		_size = size;
+	}
+	void setSize(float _size)
+	{
+		size = _size;
+	}
 #pragma endregion
 };

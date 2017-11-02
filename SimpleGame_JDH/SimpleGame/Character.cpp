@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "Object.h"
+#include "Character.h"
 
-void Object::Update(DWORD timer)
+void Character::Update(DWORD timer)
 {
 	
 	MyVector m(tempx,tempy, 0); // 방향백터
@@ -25,17 +25,17 @@ void Object::Update(DWORD timer)
 		}
 	}
 }
-void Object::Render(Renderer* p)
+void Character::Render(Renderer* p)
 {
 	p->DrawSolidRect(vector.x, vector.y, vector.z,size,r,g,b,a);
 }
-void Object::CollByObject(float down)
+void Character::CollByObject(float down)
 {
 	life -= down;
+	printf("캐릭터 hp %f\n", life);
 	if (life <= 0.0f)
 	{
 		state = 2;
-		printf("\n죽음");
 	}
 
 }

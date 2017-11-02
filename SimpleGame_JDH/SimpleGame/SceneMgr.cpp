@@ -25,6 +25,7 @@ void SceneMgr::Init()
 			std::cout << "Renderer could not be initialized.. \n";
 		}
 	}
+	b[0] = new Building(MyVector(0, 0, 0), 50, 1, 1, 0, 1, 0, OBJECTTYPE::BUILDING, 500);
 }
 void SceneMgr::Destory()
 {
@@ -48,8 +49,44 @@ void SceneMgr::Update(DWORD ElapsedTime)
 
 	}
 	TestColl();
+	TestCollByBullet();
 
+}
+void SceneMgr::TestCollByBullet()
+{
+	Bullet** Temp = NULL;
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+	{
+		if (b[i] != NULL)
+		{
+			if (b[i]->getType() == OBJECTTYPE::BUILDING)
+			{
+				Temp = ((Building*)b[i])->getBullet(); // ¹é°³
+				break;
+			}
+		}
+	}
 
+	for (int i = 0; i < 100; ++i)
+	{
+		for (int j = 0; j < MAX_OBJECT__COUNT; j++)
+		{
+			if (Temp[i] != NULL && b[j] != NULL)
+			{
+				if (b[j]->getType() == OBJECTTYPE::CHARACHTER)
+				{
+					if (BoxToBoxColl(b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize(),
+						Temp[i]->getVector().x, Temp[i]->getVector().y, Temp[i]->getSize(), Temp[i]->getSize()))
+					{
+						b[j]->CollByObject(Temp[i]->getLife());
+						Temp[i]->CollByObject(0);
+						break;
+					}
+				}
+			}
+		}
+
+	}
 }
 void SceneMgr::Render()
 {
@@ -70,20 +107,17 @@ void SceneMgr::TestColl()
 		{
 			if (b[i] == NULL || b[j] == NULL || i == j)
 				continue;
-			if (BoxToBoxColl(b[i]->getVector().x, b[i]->getVector().y, b[i]->getSize(), b[i]->getSize(), b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize()))
-			{
-				b[i]->setRGBA(1, 0, 0, 1);
-				b[j]->setRGBA(1, 0, 0, 1);
-				b[i]->CollByObject(0.1f);
-				b[j]->CollByObject(0.1f);
 
-				return;
-			}
-			else
+			if (b[i]->getType() == OBJECTTYPE::CHARACHTER && b[j]->getType() == OBJECTTYPE::BUILDING)
 			{
-				b[i]->setRGBA(1, 1, 1, 1);
-				b[j]->setRGBA(1, 1, 1, 1);
+				if (BoxToBoxColl(b[i]->getVector().x, b[i]->getVector().y, b[i]->getSize(), b[i]->getSize(), b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize()))
+				{
+					b[i]->setState(2);
+					b[j]->CollByObject(b[i]->getLife());
+					break;
+				}
 			}
+
 
 
 		}
@@ -104,9 +138,8 @@ void SceneMgr::Mouse(int button, int state, int x, int y)
 			{
 				if (b[i] == NULL)
 				{
-					float TempSpeed = 3 - rand() % 6;
-					TempSpeed == 0 ? TempSpeed = 100 : TempSpeed = TempSpeed * 500;
-					b[i] = new Object(MyVector(x - 250, 250 - y, 0), 20, 1, 1, 1, 1, TempSpeed);
+
+					b[i] = new Character(MyVector(x - 250, 250 - y, 0), 10, 1, 1, 1, 1, 300, OBJECTTYPE::CHARACHTER, 10);
 					break;
 
 				}

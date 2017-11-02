@@ -1,5 +1,5 @@
 #pragma once
-
+#include <math.h>
 
 class MyVector
 {
@@ -32,6 +32,19 @@ public:
 		this->y = y;
 		this->z = z;
 
+	}
+	void Nomalizing()
+	{
+		float len = VectorSize();
+
+		this->x = x / len;
+		this->y = y / len;
+		this->z = z / len;
+
+	}
+	float VectorSize()
+	{
+		return sqrtf(x*x + y*y + z*z);
 	}
 #pragma region Vector operator
 	
