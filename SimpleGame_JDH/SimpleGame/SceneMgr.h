@@ -28,6 +28,7 @@ public:
 	
 	void TestColl();
 	void TestCollByBullet(); // 총알 캐릭터
+	void TestCollByArrow(); // Arrow 랑 다른 물체들
 	void Mouse(int button, int state, int x, int y);
 	bool BoxToBoxColl(float x, float y, float w, float h, float x1, float y1, float w1, float h1);
 };

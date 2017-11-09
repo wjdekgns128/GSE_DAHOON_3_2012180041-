@@ -16,6 +16,24 @@ void Character::Update(DWORD timer)
 	{
 		tempy *= -1;
 	}
+	CreateTime += sce;
+	if (CreateTime >= 0.5f)
+	{
+		CreateArrow();
+		CreateTime = 0.0f;
+	}
+	for (int i = 0; i < 100; ++i)
+	{
+		if (pArrow[i] != NULL)
+		{
+			pArrow[i]->Update(timer);
+
+			if (pArrow[i]->getState() == 2)
+			{
+				SAFE_DELETE(pArrow[i]);
+			}
+		}
+	}
 	if (state == 1)
 	{
 		saveTime += sce;
@@ -24,10 +42,18 @@ void Character::Update(DWORD timer)
 			state = 2;
 		}
 	}
+
 }
 void Character::Render(Renderer* p)
 {
 	p->DrawSolidRect(vector.x, vector.y, vector.z,size,r,g,b,a);
+	for (int i = 0; i < 100; ++i)
+	{
+		if (pArrow[i] != NULL)
+		{
+			pArrow[i]->Render(p);
+		}
+	}
 }
 void Character::CollByObject(float down)
 {
@@ -39,4 +65,17 @@ void Character::CollByObject(float down)
 	}
 
 }
+
+void Character::CreateArrow()
+{
+	for (int i = 0; i < 100; ++i)
+	{
+		if (pArrow[i] == NULL)
+		{
+			pArrow[i] = new Arrow(vector, 4, 0, 1, 0, 1, 200, OBJECTTYPE::ARROW, 10, HeroId);
+			break;
+		}
+	}
+}
+
 

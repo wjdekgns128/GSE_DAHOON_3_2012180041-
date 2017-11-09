@@ -50,7 +50,60 @@ void SceneMgr::Update(DWORD ElapsedTime)
 	}
 	TestColl();
 	TestCollByBullet();
+	TestCollByArrow();
 
+}
+void SceneMgr::TestCollByArrow()
+{
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+	{
+		Arrow** Temp = NULL;
+
+		if (b[i] != NULL)
+		{
+			if (b[i]->getType() == OBJECTTYPE::CHARACHTER)
+			{
+				Temp = ((Character*)b[i])->getArrow(); // 백개
+
+				for (int i = 0; i < 100; ++i)
+				{
+					for (int j = 0; j < MAX_OBJECT__COUNT; j++)
+					{
+						if (Temp != NULL && Temp[i] != NULL && b[j] != NULL)
+						{
+							if (b[j]->getType() == OBJECTTYPE::CHARACHTER)
+							{
+								if (((Character*)b[j])->getHeroId() != Temp[i]->getHeroId())
+								{
+									if (BoxToBoxColl(b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize(),
+										Temp[i]->getVector().x, Temp[i]->getVector().y, Temp[i]->getSize(), Temp[i]->getSize()))
+									{
+										b[j]->CollByObject(Temp[i]->getLife());
+										Temp[i]->CollByObject(0);
+										printf("히어로 arrow 충돌\n");
+										break;
+									}
+								}
+							}
+							else if (b[j]->getType() == OBJECTTYPE::BUILDING)
+							{
+								if (BoxToBoxColl(b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize(),
+									Temp[i]->getVector().x, Temp[i]->getVector().y, Temp[i]->getSize(), Temp[i]->getSize()))
+								{
+									b[j]->CollByObject(Temp[i]->getLife());
+									Temp[i]->CollByObject(0);
+									printf("빌딩 arrow 충돌\n");
+									break;
+								}
+							}
+						}
+					}
+
+				}
+			}
+		}
+	}
+	
 }
 void SceneMgr::TestCollByBullet()
 {
@@ -139,7 +192,7 @@ void SceneMgr::Mouse(int button, int state, int x, int y)
 				if (b[i] == NULL)
 				{
 
-					b[i] = new Character(MyVector(x - 250, 250 - y, 0), 10, 1, 1, 1, 1, 300, OBJECTTYPE::CHARACHTER, 10);
+					b[i] = new Character(MyVector(x - 250, 250 - y, 0), 10, 1, 1, 1, 1, 300, OBJECTTYPE::CHARACHTER, 10,i);
 					break;
 
 				}

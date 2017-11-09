@@ -37,6 +37,9 @@
     <Filter Include="헤더 파일\My\Define">
       <UniqueIdentifier>{652818a6-669f-419d-9ecb-69e7cce22eab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Load">
+      <UniqueIdentifier>{462b87d2-e893-46d5-987b-edc4229f76b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -72,6 +75,12 @@
     <ClInclude Include="Bullet.h">
       <Filter>헤더 파일\My\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>헤더 파일\My\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadPng.h">
+      <Filter>소스 파일\Load</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -95,12 +104,30 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>소스 파일\My\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>소스 파일\My\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadPng.cpp">
+      <Filter>소스 파일\Load</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\SolidRect.fs">
       <Filter>소스 파일\Shaders</Filter>
     </None>
     <None Include="Shaders\SolidRect.vs">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SolidRectWithTexture.fs">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SolidRectWithTexture.vs">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SolidRectWithTextureSeq.fs">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SolidRectWithTextureSeq.vs">
       <Filter>소스 파일\Shaders</Filter>
     </None>
   </ItemGroup>

@@ -25,12 +25,17 @@ void Building::Update(DWORD timer)
 }
 void Building::Render(Renderer* p)
 {
+	if (Texid == -999)
+	{
+		Texid = p->CreatePngTexture("res/Building.png");
+	}
 	for (int i = 0; i < 100; ++i)
 	{
 		if(pBullet[i] != NULL)
 		pBullet[i]->Render(p);
 	}
-	p->DrawSolidRect(vector.x, vector.y, vector.z, size, r, g, b, a);
+	p->DrawTexturedRect(vector.x, vector.y, vector.z, size, r, g, b, a, Texid);
+	//p->DrawSolidRect(vector.x, vector.y, vector.z, size, r, g, b, a);
 }
 void Building::CollByObject(float down)
 {
