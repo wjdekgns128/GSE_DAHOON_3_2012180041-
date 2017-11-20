@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -13,32 +9,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Shaders">
+    <Filter Include="data">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="data\Shaders">
       <UniqueIdentifier>{aa86e47f-445f-4440-9a76-173363b46c4e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\My">
-      <UniqueIdentifier>{a2991662-2397-471a-be95-078743005713}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\My">
+    <Filter Include="data\My">
       <UniqueIdentifier>{dd266f73-b862-4483-b03b-440cef70594d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\My\Object">
-      <UniqueIdentifier>{557470d6-2d9a-4c87-8073-d2e6eac691bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\My\Object">
+    <Filter Include="data\My\Object">
       <UniqueIdentifier>{c4c9b99b-13ff-45f6-a2c7-b3edb179f281}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\My\SceneMgr">
+    <Filter Include="data\My\SceneMgr">
       <UniqueIdentifier>{6891666c-d32e-4081-bc5d-e239bef4a6aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\My\SceneMgr">
-      <UniqueIdentifier>{f82b2e7c-2931-416c-8b07-3be0d92d5310}</UniqueIdentifier>
+    <Filter Include="data\My\Team">
+      <UniqueIdentifier>{b39af163-66a7-4a6d-88fa-66b6df4460d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\My\Define">
+    <Filter Include="data\My\Team\Team1">
+      <UniqueIdentifier>{305c85aa-da0b-4524-96a2-778150f86768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\My\Team\Team2">
+      <UniqueIdentifier>{fd5f7343-b33b-4c0e-9667-a254759b5b4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\Load">
+      <UniqueIdentifier>{462b87d2-e893-46d5-987b-edc4229f76b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\My\Utility">
       <UniqueIdentifier>{652818a6-669f-419d-9ecb-69e7cce22eab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Load">
-      <UniqueIdentifier>{462b87d2-e893-46d5-987b-edc4229f76b0}</UniqueIdentifier>
+    <Filter Include="data\My\Object\Arrow">
+      <UniqueIdentifier>{17544c3f-8700-456e-bb97-5ae4606078df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\My\Object\Building">
+      <UniqueIdentifier>{f5626d91-6a21-4626-bb46-f9f35adf934c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\My\Object\Bullet">
+      <UniqueIdentifier>{5378aafd-6cfe-45c5-aa2c-701a4c574fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\My\Object\Character">
+      <UniqueIdentifier>{6e92ded1-6716-4cd0-b5f0-e3245235a8da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,81 +66,105 @@
     <ClInclude Include="Renderer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MyVector.h">
-      <Filter>헤더 파일\My</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseObject.h">
-      <Filter>헤더 파일\My</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMgr.h">
-      <Filter>헤더 파일\My\SceneMgr</Filter>
-    </ClInclude>
     <ClInclude Include="MyDefine.h">
-      <Filter>헤더 파일\My\Define</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>헤더 파일\My\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Building.h">
-      <Filter>헤더 파일\My\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>헤더 파일\My\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Arrow.h">
-      <Filter>헤더 파일\My\Object</Filter>
+      <Filter>data\My\Utility</Filter>
     </ClInclude>
     <ClInclude Include="LoadPng.h">
-      <Filter>소스 파일\Load</Filter>
+      <Filter>data\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="MyColor.h">
+      <Filter>data\My\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVector.h">
+      <Filter>data\My\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>data\My\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturData.h">
+      <Filter>data\My\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Team.h">
+      <Filter>data\My\Team</Filter>
+    </ClInclude>
+    <ClInclude Include="Team1.h">
+      <Filter>data\My\Team\Team1</Filter>
+    </ClInclude>
+    <ClInclude Include="Team2.h">
+      <Filter>data\My\Team\Team2</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObject.h">
+      <Filter>data\My\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>data\My\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>data\My\Object\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>data\My\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>data\My\Object\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>data\My\Object\Arrow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>data</Filter>
     </ClCompile>
     <ClCompile Include="SimpleGame.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>data</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMgr.cpp">
-      <Filter>소스 파일\My\SceneMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>소스 파일\My\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Building.cpp">
-      <Filter>소스 파일\My\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>소스 파일\My\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Arrow.cpp">
-      <Filter>소스 파일\My\Object</Filter>
+      <Filter>data</Filter>
     </ClCompile>
     <ClCompile Include="LoadPng.cpp">
-      <Filter>소스 파일\Load</Filter>
+      <Filter>data\Load</Filter>
+    </ClCompile>
+    <ClCompile Include="Team1.cpp">
+      <Filter>data\My\Team\Team1</Filter>
+    </ClCompile>
+    <ClCompile Include="Team2.cpp">
+      <Filter>data\My\Team\Team2</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>data\My\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>data\My\Object\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>data\My\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>data\My\Object\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>data\My\Object\Arrow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\SolidRect.fs">
-      <Filter>소스 파일\Shaders</Filter>
+      <Filter>data\Shaders</Filter>
     </None>
     <None Include="Shaders\SolidRect.vs">
-      <Filter>소스 파일\Shaders</Filter>
+      <Filter>data\Shaders</Filter>
     </None>
     <None Include="Shaders\SolidRectWithTexture.fs">
-      <Filter>소스 파일\Shaders</Filter>
+      <Filter>data\Shaders</Filter>
     </None>
     <None Include="Shaders\SolidRectWithTexture.vs">
-      <Filter>소스 파일\Shaders</Filter>
+      <Filter>data\Shaders</Filter>
     </None>
     <None Include="Shaders\SolidRectWithTextureSeq.fs">
-      <Filter>소스 파일\Shaders</Filter>
+      <Filter>data\Shaders</Filter>
     </None>
     <None Include="Shaders\SolidRectWithTextureSeq.vs">
-      <Filter>소스 파일\Shaders</Filter>
+      <Filter>data\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -1,30 +1,45 @@
 #include "stdafx.h"
 #include "Arrow.h"
 
-void Arrow::Update(DWORD timer)
+void Arrow::Update(float timer)
 {
-	// 방향백터
-	float sce = (float)timer / 1000.0;
-	float s = Speed* sce;
-	vector.x = vector.x + (Move.x * (Speed * sce)); // 시간
-	vector.y = vector.y + (Move.y * (Speed * sce)); // 시간
-	if (vector.x <= -250 + size / 2 || vector.x >= 250 - size / 2)
+	if (state != 1)
+		return;
+	dietimer += timer;
+	vec += (moveVector * timer * speed);
+	if (vec.x <= -250 + size / 2 || vec.x >= 250 - size / 2)
 	{
 		state = 2;
 	}
-	if (vector.y <= -250 + size / 2 || vector.y >= 250 - size / 2)
+	if (vec.y <= -400 + size / 2 || vec.y >= 400 - size / 2)
+	{
+		state = 2;
+	}
+	if (dietimer >= lifetime)
 	{
 		state = 2;
 	}
 }
 void Arrow::Render(Renderer* p)
 {
-	p->DrawSolidRect(vector.x, vector.y, vector.z, size, r, g, b, a);
+	if (state != 1)
+		return;
+	p->DrawSolidRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a);
 }
-void Arrow::CollByObject(float down)
+
+void Arrow::CollProcessing(BaseObject* p)
 {
-	state = 2;
+	switch (p->getType())
+	{
+	case OBJECTTYPE::BUILDING:
+	case OBJECTTYPE::CHARACHTER:
+		printf("arrow 삭제\n");
+
+		state = 2;
+		break;
+	}
 }
+
 
 
 

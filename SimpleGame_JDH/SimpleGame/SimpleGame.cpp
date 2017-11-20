@@ -12,8 +12,14 @@ but WITHOUT ANY WARRANTY.
 #include <iostream>
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
-
+#include <crtdbg.h>
 #include   "SceneMgr.h"
+
+#ifndef _DEBUG
+#define new new(_CLIENT_BLOCK,__FILE__,__LINE)
+#endif
+
+
 SceneMgr* g_pMgr = NULL;
 DWORD timer = timeGetTime();
 void RenderScene(void)
@@ -53,11 +59,15 @@ void SpecialKeyInput(int key, int x, int y)
 
 int main(int argc, char **argv)
 {
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // ¸¯
+
+
+
 	// Initialize GL things
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0, 0);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(500, 800);
 	glutCreateWindow("Game Software Engineering KPU");
 	glewInit();
 	if (glewIsSupported("GL_VERSION_3_0"))
@@ -82,7 +92,9 @@ int main(int argc, char **argv)
 	glutMouseFunc(MouseInput);
 	glutSpecialFunc(SpecialKeyInput);
 	glutMainLoop();
+	g_pMgr->Destory();
 	delete g_pMgr;
+
     return 0;
 }
 

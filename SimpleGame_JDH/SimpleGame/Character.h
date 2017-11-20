@@ -1,56 +1,46 @@
 #pragma once
 #include <stdio.h>
-#include "BaseObject.h"
-#include "Bullet.h"
 #include "Arrow.h"
+#include "BaseObject.h"
 class Character : public BaseObject
 {
 private:
-	Arrow*	pArrow[100];
-	int  HeroId;
-	float tempx;
-	float tempy;
-	float saveTime;
-	float CreateTime;
+	float		waitMoveTimer;
+	int       waitRandomTimer;
+	float       createArrowTimer;
+	MyVector moveVector;
+	Arrow*		pArrow[MAX_OBJECT__COUNT];
+
 public:
-	Character(MyVector v, float size, float r, float g, float b, float a, float Speed,
-		OBJECTTYPE type,float life,int HeroId) : BaseObject(v, r, g, b, a, Speed,type,life)
+	Character(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyVector Target, MyColor color, float size, float life, float lifetime,float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
 	{
-		this->HeroId = HeroId;
-		for (int i = 0; i < 100; ++i)
+		waitRandomTimer = rand() % 10 + 4;
+		waitMoveTimer = 0.0f;
+		printf("기달리는 시간 : %d\n", waitRandomTimer);
+
+		moveVector = Target- vec;
+		moveVector.Nomalizing();
+		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 			pArrow[i] = NULL;
-		this->size = size;
-		tempx = (((5 + (rand() % 10)) - 10) * 0.1f) + 0.1f;
-		tempy = (((5 + (rand() % 10)) - 10) * 0.1f) + 0.1f;
-		 lifeTime = (rand()%1000000 + 1000000) * 0.001f;
-		 state = 1; // 생성상태
-		 saveTime = 0.0;
-		 CreateTime = 0.0;
+		createArrowTimer = 0.0f;
 	}
 
-	Character()
-	{
-		size = 1;
-	}
 	~Character()
 	{
-		for (int i = 0; i < 100; ++i)
+		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 			SAFE_DELETE(pArrow[i]);
 	}
 
 public:
-
-	int getHeroId() { return HeroId; }
-
-public:
-	void Update(DWORD timer);
-	void Render(Renderer* p);
-	// 충돌 했을때 처리
-
-	void CollByObject(float down);
-	void CreateArrow();
-	Arrow** getArrow()
+	Arrow** getArrows()
 	{
 		return pArrow;
 	}
+public:
+	void Update(float timer);
+	void Render(Renderer* p);
+	virtual void CollProcessing(BaseObject* p);
+private:
+	void CreateArrow();
+
 };

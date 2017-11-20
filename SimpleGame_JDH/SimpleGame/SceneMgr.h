@@ -1,9 +1,10 @@
 #pragma once
 #include "Renderer.h"
 #include "MyDefine.h"
-#include "BaseObject.h"
-#include "Character.h"
-#include "Building.h"
+#include "Team.h"
+#include "Team1.h"
+#include "Team2.h"
+
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
 
@@ -12,8 +13,7 @@ class SceneMgr
 {
 private:
 	Renderer *SceneRenderer;
-
-	BaseObject*  b[MAX_OBJECT__COUNT];
+	Team*		pTeam[2];
 public:
 	SceneMgr();
 	~SceneMgr();
@@ -23,12 +23,8 @@ public:
 public:
 	void Update(DWORD ElapsedTime);
 	void Render();
-
+	void CollManager();
 
 	
-	void TestColl();
-	void TestCollByBullet(); // 총알 캐릭터
-	void TestCollByArrow(); // Arrow 랑 다른 물체들
 	void Mouse(int button, int state, int x, int y);
-	bool BoxToBoxColl(float x, float y, float w, float h, float x1, float y1, float w1, float h1);
 };

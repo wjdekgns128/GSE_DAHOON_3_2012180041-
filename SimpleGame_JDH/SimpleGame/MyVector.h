@@ -50,52 +50,58 @@ public:
 	
 	MyVector operator+(const MyVector& m)
 	{
-		x += m.x;
-		y += m.y;
-		z += m.z;
-		return MyVector(x, y, z);
+		
+		return MyVector(x+m.x, y+m.y, z+m.z);
 	}
 	MyVector operator*(const MyVector& m)
 	{
-		x *= m.x;
-		y *= m.y;
-		z *= m.z;
-		return MyVector(x, y, z);
+		return MyVector(x * m.x, y * m.y, z * m.z);
+
 
 	}
 	MyVector operator*(const float m)
 	{
-		x *= m;
-		y *= m;
-		z *= m;
-		return MyVector(x, y, z);
+	
+		return MyVector(x * m, y * m, z * m);
+
 
 	}
 	MyVector operator-(const MyVector& m)
 	{
-		x -= m.x;
-		y -= m.y;
-		z -= m.z;
-		return MyVector(x, y, z);
+		return MyVector(x - m.x, y - m.y, z - m.z);
+
 
 	}
-	void operator+=(const MyVector& m)
+	MyVector& operator+=(const MyVector& m)
 	{
 		x += m.x;
 		y += m.y;
 		z += m.z;
+		return *this;
 	}
-	void operator*=(const MyVector& m)
+	MyVector& operator*=(const MyVector& m)
 	{
 		x *= m.x;
 		y *= m.y;
 		z *= m.z;
+		return *this;
+
 	}
-	void operator-=(const MyVector& m)
+	MyVector& operator-=(const MyVector& m)
 	{
 		x -= m.x;
 		y -= m.y;
 		z -= m.z;
+		return *this;
+
+	}
+	MyVector& operator*=(const float& m)
+	{
+		x *= m;
+		y *= m;
+		z *= m;
+		return *this;
+
 	}
 #pragma endregion
 

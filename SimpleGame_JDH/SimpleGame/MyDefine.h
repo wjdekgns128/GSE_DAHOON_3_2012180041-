@@ -11,3 +11,14 @@ enum OBJECTTYPE
 	BULLET,
 	ARROW,
 };
+enum TEAMTAG
+{
+	TEAM_1 = 0,
+	TEAM_2,
+};
+enum TEXTURE
+{
+	TEX_TEAM_1_BUILDING = 0,
+	TEX_TEAM_2_BUILDING,
+
+};

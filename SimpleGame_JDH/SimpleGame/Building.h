@@ -5,44 +5,33 @@
 class Building : public BaseObject
 {
 private:
-	unsigned int Texid;
-	Bullet*		pBullet[100];
-	float		savetimer;
+	float       createBulletTimer;
+	Bullet*		pBullet[MAX_OBJECT__COUNT];
 public:
-	Building(MyVector v, float size, float r, float g, float b, float a, float Speed,
-		OBJECTTYPE type, float life) : BaseObject(v, r, g, b, a, Speed, type,  life)
+	Building(OBJECTTYPE type,TEAMTAG tag, MyVector vec, MyColor color, float size, float life, float lifetime) : BaseObject(type,tag,vec,color,size,life,lifetime,0)
 	{
-		Texid = -999;
-		this->size = size;
-		state = 1; // 생성상태
-		for (int i = 0; i < 100; ++i)
+		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 			pBullet[i] = NULL;
-		savetimer = 0.0f;
+		createBulletTimer = 0.0f;
 	}
-
-	Building()
-	{
-	}
+	
 	~Building()
 	{
-		for (int i = 0; i < 100; ++i)
+		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 			SAFE_DELETE(pBullet[i]);
 	}
 
 public:
-
-public:
-	void Update(DWORD timer);
-	void Render(Renderer* p);
-	void CollByObject(float down);
-
-private:
-	void CreateBullet();
-
-public:
-	Bullet** getBullet()
+	Bullet** getBullets()
 	{
 		return pBullet;
 	}
+public:
+	void Update(float timer);
+	void Render(Renderer* p);
+	void CollProcessing(BaseObject* p);
+
+private:
+	void CreateBullet();
 
 };

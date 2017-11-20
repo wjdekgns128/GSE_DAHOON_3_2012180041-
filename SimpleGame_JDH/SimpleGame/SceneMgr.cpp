@@ -1,204 +1,142 @@
 #include "stdafx.h"
 #include "SceneMgr.h"
-
+#include "TexturData.h"
 SceneMgr::SceneMgr()
 {
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-		b[i] = NULL;
 	SceneRenderer = NULL;
+	for (int i = 0; i < 2; ++i)
+		pTeam[i] = NULL;
 }
 SceneMgr::~SceneMgr()
 {
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-		SAFE_DELETE(b[i]);
+	
 	SAFE_DELETE(SceneRenderer);
+	for (int i = 0; i < 2; ++i)
+		SAFE_DELETE(pTeam[i]);
 
 }
 void SceneMgr::Init()
 {
-
 	if (SceneRenderer == NULL)
 	{
-		SceneRenderer = new Renderer(500, 500);
+		SceneRenderer = new Renderer(500, 800);
 		if (!SceneRenderer->IsInitialized())
 		{
 			std::cout << "Renderer could not be initialized.. \n";
 		}
 	}
-	b[0] = new Building(MyVector(0, 0, 0), 50, 1, 1, 0, 1, 0, OBJECTTYPE::BUILDING, 500);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Building.png"), TEX_TEAM_1_BUILDING);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Building.png"), TEX_TEAM_2_BUILDING);
+
+
+	pTeam[0] = new Team1();
+	pTeam[1] = new Team2();
+
+
 }
 void SceneMgr::Destory()
 {
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-		SAFE_DELETE(b[i]);
 	SAFE_DELETE(SceneRenderer);
-
+	for (int i = 0; i < 2; ++i)
+		SAFE_DELETE(pTeam[i]);
 }
 void SceneMgr::Update(DWORD ElapsedTime)
 {
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+	for (int i = 0; i < 2; ++i)
 	{
-		if (b[i] != NULL)
+		if (pTeam[i] != NULL)
 		{
-			b[i]->Update(ElapsedTime);
-			if (b[i]->getState() == 2)
-			{
-				SAFE_DELETE(b[i]);
-			}
+			pTeam[i]->Update((float)ElapsedTime * 0.001f);
 		}
-
 	}
-	TestColl();
-	TestCollByBullet();
-	TestCollByArrow();
-
+	CollManager();
 }
-void SceneMgr::TestCollByArrow()
+void SceneMgr::CollManager()
 {
+	int count = 0;
+	int count1 = 0;
+	BaseObject* p[500] = { NULL, };
+	BaseObject* p1[500] = { NULL, };
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
-		Arrow** Temp = NULL;
-
-		if (b[i] != NULL)
+		if (pTeam[0]->GetObjects()[i] != NULL)
 		{
-			if (b[i]->getType() == OBJECTTYPE::CHARACHTER)
+			p[count++] = pTeam[0]->GetObjects()[i];
+			for (int j = 0; j < MAX_OBJECT__COUNT; ++j)
 			{
-				Temp = ((Character*)b[i])->getArrow(); // 백개
-
-				for (int i = 0; i < 100; ++i)
+				if (pTeam[0]->GetObjects()[i]->getType() == OBJECTTYPE::CHARACHTER)
 				{
-					for (int j = 0; j < MAX_OBJECT__COUNT; j++)
-					{
-						if (Temp != NULL && Temp[i] != NULL && b[j] != NULL)
-						{
-							if (b[j]->getType() == OBJECTTYPE::CHARACHTER)
-							{
-								if (((Character*)b[j])->getHeroId() != Temp[i]->getHeroId())
-								{
-									if (BoxToBoxColl(b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize(),
-										Temp[i]->getVector().x, Temp[i]->getVector().y, Temp[i]->getSize(), Temp[i]->getSize()))
-									{
-										b[j]->CollByObject(Temp[i]->getLife());
-										Temp[i]->CollByObject(0);
-										printf("히어로 arrow 충돌\n");
-										break;
-									}
-								}
-							}
-							else if (b[j]->getType() == OBJECTTYPE::BUILDING)
-							{
-								if (BoxToBoxColl(b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize(),
-									Temp[i]->getVector().x, Temp[i]->getVector().y, Temp[i]->getSize(), Temp[i]->getSize()))
-								{
-									b[j]->CollByObject(Temp[i]->getLife());
-									Temp[i]->CollByObject(0);
-									printf("빌딩 arrow 충돌\n");
-									break;
-								}
-							}
-						}
-					}
-
+					Character* d = (Character*)pTeam[0]->GetObjects()[i];
+					if(d->getArrows()[j] != NULL)
+					p[count++] = d->getArrows()[j];
+				}
+				else if (pTeam[0]->GetObjects()[i]->getType() == OBJECTTYPE::BUILDING)
+				{
+					Building* d = (Building*)pTeam[0]->GetObjects()[i];
+					if (d->getBullets()[j] != NULL)
+					p[count++] = d->getBullets()[j];
 				}
 			}
 		}
 	}
-	
-}
-void SceneMgr::TestCollByBullet()
-{
-	Bullet** Temp = NULL;
+	 count = 0;
+	 count1 = 0;
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
-		if (b[i] != NULL)
+		if (pTeam[1]->GetObjects()[i] != NULL)
 		{
-			if (b[i]->getType() == OBJECTTYPE::BUILDING)
+			p1[count++] = pTeam[1]->GetObjects()[i];
+			for (int j = 0; j < MAX_OBJECT__COUNT; ++j)
 			{
-				Temp = ((Building*)b[i])->getBullet(); // 백개
-				break;
-			}
-		}
-	}
-
-	for (int i = 0; i < 100; ++i)
-	{
-		for (int j = 0; j < MAX_OBJECT__COUNT; j++)
-		{
-			if (Temp != NULL && Temp[i] != NULL && b[j] != NULL)
-			{
-				if (b[j]->getType() == OBJECTTYPE::CHARACHTER)
+				if (pTeam[1]->GetObjects()[i]->getType() == OBJECTTYPE::CHARACHTER)
 				{
-					if (BoxToBoxColl(b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize(),
-						Temp[i]->getVector().x, Temp[i]->getVector().y, Temp[i]->getSize(), Temp[i]->getSize()))
-					{
-						b[j]->CollByObject(Temp[i]->getLife());
-						Temp[i]->CollByObject(0);
-						break;
-					}
+					Character* d = (Character*)pTeam[1]->GetObjects()[i];
+					if (d->getArrows()[j] != NULL)
+						p1[count++] = d->getArrows()[j];
+				}
+				else if (pTeam[1]->GetObjects()[i]->getType() == OBJECTTYPE::BUILDING)
+				{
+					Building* d = (Building*)pTeam[1]->GetObjects()[i];
+					if (d->getBullets()[j] != NULL)
+						p1[count++] = d->getBullets()[j];
 				}
 			}
 		}
+	}
+	for (int i = 0; i < 500; ++i)
+	{
+		for (int j = 0; j < 500; ++j)
+		{
+			if (p[i] != NULL)
+			{
+				if (p1[j] != NULL)
+					if (p[i]->CollByObject(p1[j]))
+					{
+						p[i]->CollProcessing(p1[j]);
+						p1[j]->CollProcessing(p[i]);
+					}
 
+			}
+		}
 	}
 }
 void SceneMgr::Render()
 {
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+	for (int i = 0; i < 2; ++i)
 	{
-		if (b[i] != NULL)
+		if (pTeam[i] != NULL)
 		{
-			b[i]->Render(SceneRenderer);
+			pTeam[i]->Render(SceneRenderer);
 		}
 	}
-
-}
-void SceneMgr::TestColl()
-{
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-	{
-		for (int j = 0; j < MAX_OBJECT__COUNT; ++j)
-		{
-			if (b[i] == NULL || b[j] == NULL || i == j)
-				continue;
-
-			if (b[i]->getType() == OBJECTTYPE::CHARACHTER && b[j]->getType() == OBJECTTYPE::BUILDING)
-			{
-				if (BoxToBoxColl(b[i]->getVector().x, b[i]->getVector().y, b[i]->getSize(), b[i]->getSize(), b[j]->getVector().x, b[j]->getVector().y, b[j]->getSize(), b[j]->getSize()))
-				{
-					b[i]->setState(2);
-					b[j]->CollByObject(b[i]->getLife());
-					break;
-				}
-			}
-
-
-
-		}
-	}
-}
-bool SceneMgr::BoxToBoxColl(float x, float y, float w, float h, float x1, float y1, float w1, float h1)
-{
-	return x + w >= x1 && x <= x1 + w1
-		&&  y + h >= y1 &&y <= y1 + h1;
 }
 void SceneMgr::Mouse(int button, int state, int x, int y)
 {
-	if (button == GLUT_LEFT_BUTTON)
+	for (int i = 0; i < 2; ++i)
 	{
-		if (state == GLUT_UP)
+		if (pTeam[i] != NULL)
 		{
-			for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-			{
-				if (b[i] == NULL)
-				{
-
-					b[i] = new Character(MyVector(x - 250, 250 - y, 0), 10, 1, 1, 1, 1, 300, OBJECTTYPE::CHARACHTER, 10,i);
-					break;
-
-				}
-			}
-
+			pTeam[i]->Mouse(button, state, x, y);
 		}
 	}
-
 }
