@@ -57,7 +57,7 @@ void Building::CreateBullet()
 			MyColor temp;
 			tag == TEAMTAG::TEAM_1 ? temp = t1 : temp = t2;
 
-			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 5, 20, 999999,600);
+			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 5, 20, 999999,600); // 크기가 너무작아서 5로 수정.
 			break;
 		}
 	}

@@ -10,7 +10,7 @@ public:
 	{
 		float y = (rand() % 500 );
 		tag == TEAMTAG::TEAM_1 ? y *= -1 : y = y;
-		moveVector.Setting(rand() % 100 , y, 0);
+		moveVector.Setting(rand() % 100 - 100 , y, 0);
 		moveVector.Nomalizing();
 		dietimer = 0.0f;
 	}

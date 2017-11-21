@@ -13,11 +13,11 @@ public:
 
 	}
 public:
-	void Input(unsigned int n, TEXTURE num)
+	void Input(unsigned int n, TEXTUREID num)
 	{
 		Number[(int)num] = n;
 	}
-	unsigned int getTextur(TEXTURE num)
+	unsigned int getTextur(TEXTUREID num)
 	{
 		return Number[(int)num];
 	}

@@ -15,6 +15,12 @@ SceneMgr::~SceneMgr()
 		SAFE_DELETE(pTeam[i]);
 
 }
+void SceneMgr::TextureLoad()
+{
+	//TEXTUREID
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Building.png"), TEX_TEAM_1_BUILDING);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Building.png"), TEX_TEAM_2_BUILDING);
+}
 void SceneMgr::Init()
 {
 	if (SceneRenderer == NULL)
@@ -25,9 +31,8 @@ void SceneMgr::Init()
 			std::cout << "Renderer could not be initialized.. \n";
 		}
 	}
-	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Building.png"), TEX_TEAM_1_BUILDING);
-	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Building.png"), TEX_TEAM_2_BUILDING);
-
+	
+	TextureLoad();
 
 	pTeam[0] = new Team1();
 	pTeam[1] = new Team2();
