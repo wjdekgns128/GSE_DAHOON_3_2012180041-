@@ -54,7 +54,7 @@ void Character::CreateArrow()
 			MyColor temp;
 			tag == TEAMTAG::TEAM_1 ? temp = t1 : temp = t2;
 
-			pArrow[i] = new Arrow(OBJECTTYPE::ARROW, tag, vec, temp, 5, 10.0f, 999999, 100); // 크기가 너무작아서 5로 수정.
+			pArrow[i] = new Arrow(OBJECTTYPE::ARROW, tag, vec, temp, 2, 10.0f, 999999, 100); // 크기가 너무작아서 5로 수정.
 			break;
 		}
 	}
