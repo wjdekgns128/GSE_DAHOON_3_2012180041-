@@ -2,14 +2,18 @@
 #include <stdio.h>
 #include "Arrow.h"
 #include "BaseObject.h"
+#include "TexturData.h"
+
 class Character : public BaseObject
 {
 private:
+	MyColor   HpBarColor;
 	float		waitMoveTimer;
 	int       waitRandomTimer;
 	float       createArrowTimer;
 	MyVector moveVector;
 	Arrow*		pArrow[MAX_OBJECT__COUNT];
+	unsigned int TexID;
 
 public:
 	Character(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyVector Target, MyColor color, float size, float life, float lifetime,float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
@@ -23,6 +27,13 @@ public:
 		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 			pArrow[i] = NULL;
 		createArrowTimer = 0.0f;
+		tag == TEAMTAG::TEAM_1 ?
+			HpBarColor.SetColor(1, 0, 0, 1) :
+			HpBarColor.SetColor(0, 0, 1, 1);
+
+		tag == TEAMTAG::TEAM_1 ?
+			TexID = TexturData::getinstance().getTextur(TEX_TEAM_1_CHARACTER) :
+			TexID = TexturData::getinstance().getTextur(TEX_TEAM_2_CHARACTER);
 	}
 
 	~Character()

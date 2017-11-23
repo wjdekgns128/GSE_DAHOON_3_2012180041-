@@ -24,7 +24,7 @@ void Arrow::Render(Renderer* p)
 {
 	if (state != 1)
 		return;
-	p->DrawSolidRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a);
+	p->DrawSolidRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, LEVEL_ARROW);
 }
 
 void Arrow::CollProcessing(BaseObject* p)

@@ -26,7 +26,7 @@ void Bullet::Render(Renderer* p)
 {
 	if (state != 1)
 		return;
-	p->DrawSolidRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a);
+	p->DrawSolidRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a,LEVEL_BULLET);
 }
 
 
@@ -34,6 +34,7 @@ void Bullet::CollProcessing(BaseObject* p)
 {
 	switch (p->getType())
 	{
+	case OBJECTTYPE::BUILDING:
 	case OBJECTTYPE::CHARACHTER:
 		state = 2;
 		printf("bullet ªË¡¶\n");

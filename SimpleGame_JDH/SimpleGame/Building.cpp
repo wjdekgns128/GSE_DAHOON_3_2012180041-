@@ -8,7 +8,7 @@ void Building::Update(float timer)
 	dietimer += timer;
 	createBulletTimer += timer;
 
-	if (createBulletTimer >= 10.0f)
+	if (createBulletTimer >= 6.0F)
 	{
 		CreateBullet();
 		createBulletTimer = 0.0f;
@@ -33,11 +33,10 @@ void Building::Render(Renderer* p)
 {
 	if (state != 1)
 		return;
-	unsigned int TexID;
-	tag == TEAMTAG::TEAM_1 ?
-		TexID = TexturData::getinstance().getTextur(TEX_TEAM_1_BUILDING) :
-		TexID = TexturData::getinstance().getTextur(TEX_TEAM_2_BUILDING);
-	p->DrawTexturedRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, TexID);
+	
+	float NowHpBar =life / 500.f;
+	p->DrawTexturedRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, TexID,LEVEL_BUILDING);
+	p->DrawSolidRectGauge(vec.x, vec.y + 65, vec.z, 80, 15, HpBarColor.r,HpBarColor.g,HpBarColor.b,HpBarColor.a, NowHpBar, LEVEL_UI);
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pBullet[i] != NULL)
@@ -57,7 +56,7 @@ void Building::CreateBullet()
 			MyColor temp;
 			tag == TEAMTAG::TEAM_1 ? temp = t1 : temp = t2;
 
-			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 2, 20, 999999,600); // 크기가 너무작아서 5로 수정.
+			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 4, 15, 999999,600); // 크기가 너무작아서 5로 수정.
 			break;
 		}
 	}
@@ -69,7 +68,7 @@ void Building::CollProcessing(BaseObject* p)
 {
 	switch (p->getType())
 	{
-
+	case OBJECTTYPE::BULLET:
 	case OBJECTTYPE::CHARACHTER:
 	case OBJECTTYPE::ARROW:
 		life -= p->getLife();

@@ -16,7 +16,7 @@ void Team1::Update(float ElapsedTime)
 			}
 		}
 	}
-	if (TeamTimer > 5.0f)
+	if (TeamTimer > 1.5f)
 	{
 		CreateCharacter();
 		TeamTimer = 0.0f;
@@ -41,7 +41,7 @@ void Team1::CreateCharacter()
 	{
 		if (pObject[i] == NULL)
 		{
-			pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0),FindTarget(), MyColor(1, 0, 0, 1), 10, 10, 9999999, 300);
+			pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0),FindTarget(), MyColor(1, 1, 1, 1), 30, 100, 9999999, 300);
 			break;
 		}
 

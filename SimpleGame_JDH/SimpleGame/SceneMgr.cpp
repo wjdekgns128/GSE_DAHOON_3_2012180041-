@@ -20,6 +20,9 @@ void SceneMgr::TextureLoad()
 	//TEXTUREID
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Building.png"), TEX_TEAM_1_BUILDING);
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Building.png"), TEX_TEAM_2_BUILDING);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Character.png"), TEX_TEAM_1_CHARACTER);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Character.png"), TEX_TEAM_2_CHARACTER);
+
 }
 void SceneMgr::Init()
 {

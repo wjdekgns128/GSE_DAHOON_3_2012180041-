@@ -36,7 +36,7 @@ void Team2::Mouse(int button, int state, int x, int y)
 		{
 			if (tempy < -10 && tempy > -390)
 			{
-				if (TeamTimer >= 7.0f)
+				if (TeamTimer >= 1.5f)
 				{
 					CreateCharacter(tempx, tempy);
 					TeamTimer = 0.0f;
@@ -53,7 +53,7 @@ void Team2::CreateCharacter(int x, int y)
 	{
 		if (pObject[i] == NULL)
 		{
-			pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0), FindTarget(), MyColor(0, 0, 1, 1), 10, 10, 9999999, 300);
+			pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0), FindTarget(), MyColor(1, 1, 1, 1), 30, 100, 9999999, 300);
 			break;
 		}
 

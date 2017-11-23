@@ -9,7 +9,7 @@ void Character::Update(float timer)
 	if (waitMoveTimer >= waitRandomTimer)
 		vec += (moveVector * timer * speed);
 	createArrowTimer += timer;
-	if (createArrowTimer >= 3.0f)
+	if (createArrowTimer >= 1.0f)
 	{
 		CreateArrow();
 		createArrowTimer = 0.0f;
@@ -34,8 +34,10 @@ void Character::Render(Renderer* p)
 {
 	if (state != 1)
 		return;
+	float NowHpBar = life / 100.f;
+	p->DrawTexturedRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, TexID, LEVEL_CHARACTER);
+	p->DrawSolidRectGauge(vec.x, vec.y + 20, vec.z, 30, 6, HpBarColor.r, HpBarColor.g, HpBarColor.b, HpBarColor.a, NowHpBar, LEVEL_UI);
 
-	p->DrawSolidRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a);
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pArrow[i] != NULL)
@@ -54,7 +56,7 @@ void Character::CreateArrow()
 			MyColor temp;
 			tag == TEAMTAG::TEAM_1 ? temp = t1 : temp = t2;
 
-			pArrow[i] = new Arrow(OBJECTTYPE::ARROW, tag, vec, temp, 2, 10.0f, 999999, 100); // 크기가 너무작아서 5로 수정.
+			pArrow[i] = new Arrow(OBJECTTYPE::ARROW, tag, vec, temp, 4, 10.0f, 999999, 100); // 크기가 너무작아서 5로 수정.
 			break;
 		}
 	}
