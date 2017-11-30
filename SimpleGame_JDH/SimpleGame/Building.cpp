@@ -8,7 +8,7 @@ void Building::Update(float timer)
 	dietimer += timer;
 	createBulletTimer += timer;
 
-	if (createBulletTimer >= 2.0f)
+	if (createBulletTimer >= 5.0f)
 	{
 		CreateBullet();
 		createBulletTimer = 0.0f;
