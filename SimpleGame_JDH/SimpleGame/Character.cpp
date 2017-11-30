@@ -29,13 +29,30 @@ void Character::Update(float timer)
 	{
 		state = 2;
 	}
+	PlayAnimator(timer);
+}
+void Character::PlayAnimator(float timer)
+{
+	AnimatorTime += timer;
+	if (AnimatorTime > 0.07f)
+	{
+		NowX++;
+		if (NowX >= 6)
+		{
+			NowX = 0;
+			NowY++;
+			NowY %= 2;
+		}
+		AnimatorTime = 0.0;
+	}
 }
 void Character::Render(Renderer* p)
 {
 	if (state != 1)
 		return;
 	float NowHpBar = life / 100.f;
-	p->DrawTexturedRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, TexID, LEVEL_CHARACTER);
+	p->DrawTexturedRectSeq(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, TexID,
+		NowX, NowY, 6, 2,LEVEL_CHARACTER);
 	p->DrawSolidRectGauge(vec.x, vec.y + 20, vec.z, 30, 6, HpBarColor.r, HpBarColor.g, HpBarColor.b, HpBarColor.a, NowHpBar, LEVEL_UI);
 
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)

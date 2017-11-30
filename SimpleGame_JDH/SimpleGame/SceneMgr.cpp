@@ -22,7 +22,8 @@ void SceneMgr::TextureLoad()
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Building.png"), TEX_TEAM_2_BUILDING);
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Character.png"), TEX_TEAM_1_CHARACTER);
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Character.png"), TEX_TEAM_2_CHARACTER);
-
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/Background.png"), TEX_BACKGROUND);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/Bullet.png"), TEX_BULLET);
 }
 void SceneMgr::Init()
 {
@@ -130,6 +131,7 @@ void SceneMgr::CollManager()
 }
 void SceneMgr::Render()
 {
+	SceneRenderer->DrawTexturedRect(0,0,0,800,1,1,1,1,TexturData::getinstance().getTextur(TEX_BACKGROUND), LEVEL_BACK);
 	for (int i = 0; i < 2; ++i)
 	{
 		if (pTeam[i] != NULL)

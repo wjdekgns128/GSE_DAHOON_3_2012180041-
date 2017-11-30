@@ -14,10 +14,17 @@ private:
 	MyVector moveVector;
 	Arrow*		pArrow[MAX_OBJECT__COUNT];
 	unsigned int TexID;
+	
 
+	int				NowX;
+	int				NowY;
+	float			AnimatorTime;
 public:
 	Character(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyVector Target, MyColor color, float size, float life, float lifetime,float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
 	{
+		NowX = 0;
+		NowY = 0;
+		AnimatorTime = 0.0f;
 		waitRandomTimer = rand() % 10 + 4;
 		waitMoveTimer = 0.0f;
 		printf("기달리는 시간 : %d\n", waitRandomTimer);
@@ -53,5 +60,5 @@ public:
 	virtual void CollProcessing(BaseObject* p);
 private:
 	void CreateArrow();
-
+	void PlayAnimator(float timer);
 };
