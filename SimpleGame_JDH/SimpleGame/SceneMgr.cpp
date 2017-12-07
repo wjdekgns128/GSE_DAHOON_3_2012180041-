@@ -43,12 +43,12 @@ void SceneMgr::Init()
 	pTeam[1] = new Team2();
 
 
-	//if (pSound == NULL)
-	//{
-	//	pSound = new Sound();
-	//	int soundBG = pSound->CreateSound("Dependencies/SoundSamples/MF-W-90.XM");
-	//	pSound->PlaySound(soundBG, true, 0.2f);
-	//}
+	if (pSound == NULL)
+	{
+		pSound = new Sound();
+		int soundBG = pSound->CreateSound("Dependencies/SoundSamples/MF-W-90.XM");
+		pSound->PlaySound(soundBG, true, 0.2f);
+	}
 
 
 	//GLUT_BITMAP_9_BY_15
