@@ -7,11 +7,12 @@
 
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
-
+#include "Sound.h"
 #include <Windows.h>
 class SceneMgr
 {
 private:
+	Sound*		pSound;
 	Renderer *SceneRenderer;
 	Team*		pTeam[2];
 public:

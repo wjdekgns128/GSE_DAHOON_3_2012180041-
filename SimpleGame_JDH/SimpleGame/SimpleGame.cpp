@@ -15,9 +15,9 @@ but WITHOUT ANY WARRANTY.
 #include <crtdbg.h>
 #include   "SceneMgr.h"
 
-#ifndef _DEBUG
-#define new new(_CLIENT_BLOCK,__FILE__,__LINE)
-#endif
+//#ifndef _DEBUG
+//#define new new(_CLIENT_BLOCK,__FILE__,__LINE)
+//#endif
 
 
 SceneMgr* g_pMgr = NULL;

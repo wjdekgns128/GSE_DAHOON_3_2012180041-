@@ -4,12 +4,13 @@
 SceneMgr::SceneMgr()
 {
 	SceneRenderer = NULL;
+	pSound = NULL;
 	for (int i = 0; i < 2; ++i)
 		pTeam[i] = NULL;
 }
 SceneMgr::~SceneMgr()
 {
-	
+	SAFE_DELETE(pSound);
 	SAFE_DELETE(SceneRenderer);
 	for (int i = 0; i < 2; ++i)
 		SAFE_DELETE(pTeam[i]);
@@ -35,16 +36,26 @@ void SceneMgr::Init()
 			std::cout << "Renderer could not be initialized.. \n";
 		}
 	}
-	
+
 	TextureLoad();
 
 	pTeam[0] = new Team1();
 	pTeam[1] = new Team2();
 
 
+	//if (pSound == NULL)
+	//{
+	//	pSound = new Sound();
+	//	int soundBG = pSound->CreateSound("Dependencies/SoundSamples/MF-W-90.XM");
+	//	pSound->PlaySound(soundBG, true, 0.2f);
+	//}
+
+
+	//GLUT_BITMAP_9_BY_15
 }
 void SceneMgr::Destory()
 {
+	SAFE_DELETE(pSound);
 	SAFE_DELETE(SceneRenderer);
 	for (int i = 0; i < 2; ++i)
 		SAFE_DELETE(pTeam[i]);
@@ -58,6 +69,7 @@ void SceneMgr::Update(DWORD ElapsedTime)
 			pTeam[i]->Update((float)ElapsedTime * 0.001f);
 		}
 	}
+	SceneRenderer->DrawTextW(0, 0, GLUT_BITMAP_TIMES_ROMAN_24, 1, 1, 1, "Test Draw");
 	CollManager();
 }
 void SceneMgr::CollManager()

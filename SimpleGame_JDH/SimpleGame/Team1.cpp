@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Team1.h"
 
-
 void Team1::Update(float ElapsedTime)
 {
 	TeamTimer += ElapsedTime;
