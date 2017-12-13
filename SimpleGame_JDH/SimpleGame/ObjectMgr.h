@@ -1,12 +1,14 @@
 #pragma once
 #include "stdafx.h"
-#include "Singleton.h"
 #include "BaseObject.h"
-#include<cstdarg>
+
+#include "Singleton.h"
+
+class BaseObject;
 class ObjectMgr : public Singleton<ObjectMgr>
 {
 private:
-	BaseObject** team1_objects[2][MAX_OBJECT__COUNT];
+	BaseObject* team_objects[2][MAX_OBJECT__COUNT];
 
 public:
 	ObjectMgr()
@@ -22,12 +24,12 @@ public:
 	{
 		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 		{
-			team1_objects[tag][i] = &p[i];
+			team_objects[tag][i] = p[i];
 		}
 	}
 	BaseObject**  pullteamObjects(int tag)
 	{
-		return *team1_objects[tag];
+		return team_objects[tag];
 	}
 
 };

@@ -5,6 +5,7 @@
 
 void Team2::Update(float ElapsedTime)
 {
+	ObjectMgr::getinstance().pushteamObjects(pObject, tag);
 
 	TeamTimer += ElapsedTime;
 	selectTimer += ElapsedTime;
@@ -24,7 +25,6 @@ void Team2::Update(float ElapsedTime)
 }
 void Team2::RenderSelect(Renderer* p)
 {
-	ObjectMgr::getinstance().pullteamObjects(tag);
 	p->DrawTexturedRectSeq(-225, -375, 0, 50, 1, 1, 1, 1, TexturData::getinstance().getTextur(TEX_TEAM_2_CHARACTER),
 		0, 0, 6, 2, LEVEL_UI);
 

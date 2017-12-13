@@ -36,7 +36,21 @@ enum TEXTUREID
 	TEX_TEAM_1_CHARACTER_DEFENSE,
 	TEX_TEAM_2_CHARACTER_DEFENSE,
 };
-
+typedef struct Priority
+{
+	OBJECTTYPE type;
+	float	   PriorityDistance;
+public:
+	Priority()
+	{
+		PriorityDistance = 0;
+	}
+	Priority(OBJECTTYPE type, float dis)
+	{
+		this->type = type;
+		PriorityDistance = dis;
+	}
+}PRIORITY; // 우선순위를 위한 구조체
 
 #define CREATECHARACHTER 2.0
 #define CREATEARROWCHARACHTER 4.0

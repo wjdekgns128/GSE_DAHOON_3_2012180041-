@@ -11,11 +11,17 @@ public:
 	Bullet(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyColor color, float size, float life, float lifetime,float speed) : BaseObject(type, tag, vec, color, size, life, lifetime,speed)
 	{
 		ParticleTime = 0.0f;
-		float y;
-		tag == TEAMTAG::TEAM_1 ?  y = -1.0f : y = 1.0f;
-		moveVector.Setting(0, y, 0);
-		moveVector.Nomalizing();
+	//이 부분 수정
 		dietimer = 0.0f;
+		moveVector = GetMinDisByMaskObjects(4,
+			PRIORITY(OBJECTTYPE::CHARACHTER_DEFENSE, 1.0f),
+			PRIORITY(OBJECTTYPE::CHARACHTER, 2.2f), 
+			PRIORITY(OBJECTTYPE::CHARACHTER_ARROW, 2.7f), 
+			PRIORITY(OBJECTTYPE::BUILDING, 2.5f));
+
+		moveVector = (moveVector -vec );
+		moveVector.Nomalizing();
+
 	}
 
 	~Bullet()
