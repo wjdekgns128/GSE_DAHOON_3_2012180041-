@@ -6,7 +6,7 @@ void Bullet::Update(float timer)
 	if (state != 1)
 		return;
 	dietimer += timer;
-	vec += (moveVector * timer * 150);
+	vec += (moveVector * timer * speed);
 	if (vec.x <= -250 + size / 2 || vec.x >= 250 - size / 2)
 	{
 		state = 2;
@@ -38,6 +38,7 @@ void Bullet::CollProcessing(BaseObject* p)
 	{
 	case OBJECTTYPE::BUILDING:
 	case OBJECTTYPE::CHARACHTER:
+	case OBJECTTYPE::CHARACHTER_ARROW:
 		state = 2;
 		printf("bullet ªË¡¶\n");
 

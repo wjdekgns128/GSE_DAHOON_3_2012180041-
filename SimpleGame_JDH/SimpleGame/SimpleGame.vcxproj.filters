@@ -52,6 +52,12 @@
     <Filter Include="data\My\Object\Character">
       <UniqueIdentifier>{6e92ded1-6716-4cd0-b5f0-e3245235a8da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="data\My\Object\CharacterArrow">
+      <UniqueIdentifier>{3a83a4d5-e712-4fee-8322-ba6ebb5be156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\My\Object\CharacterDefense">
+      <UniqueIdentifier>{a284ec45-f56d-48ff-ac8c-0f9e6a38b303}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -114,6 +120,12 @@
     <ClInclude Include="Sound.h">
       <Filter>data</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterArrow.h">
+      <Filter>data\My\Object\CharacterArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectMgr.h">
+      <Filter>data\My\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -151,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterArrow.cpp">
+      <Filter>data\My\Object\CharacterArrow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

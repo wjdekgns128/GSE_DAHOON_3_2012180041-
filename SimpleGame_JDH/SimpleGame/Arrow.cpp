@@ -33,6 +33,7 @@ void Arrow::CollProcessing(BaseObject* p)
 	{
 	case OBJECTTYPE::BUILDING:
 	case OBJECTTYPE::CHARACHTER:
+	case OBJECTTYPE::CHARACHTER_ARROW:
 		printf("arrow ªË¡¶\n");
 
 		state = 2;

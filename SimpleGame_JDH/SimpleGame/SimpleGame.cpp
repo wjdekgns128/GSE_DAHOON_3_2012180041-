@@ -54,6 +54,7 @@ void KeyInput(unsigned char key, int x, int y)
 
 void SpecialKeyInput(int key, int x, int y)
 {
+	g_pMgr->Key(key, x, y);
 	RenderScene();
 }
 

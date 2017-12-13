@@ -3,6 +3,7 @@
 
 void Team1::Update(float ElapsedTime)
 {
+
 	TeamTimer += ElapsedTime;
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
@@ -15,7 +16,7 @@ void Team1::Update(float ElapsedTime)
 			}
 		}
 	}
-	if (TeamTimer > 1.5f)
+	if (TeamTimer > CREATECHARACHTER)
 	{
 		CreateCharacter();
 		TeamTimer = 0.0f;
@@ -28,7 +29,6 @@ void Team1::Render(Renderer* p)
 		if (pObject[i] != NULL)
 		{
 			pObject[i]->Render(p);
-
 		}
 	}
 }
@@ -40,13 +40,17 @@ void Team1::CreateCharacter()
 	{
 		if (pObject[i] == NULL)
 		{
-			pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0),FindTarget(), MyColor(1, 1, 1, 1), 30, 100, 9999999, 300);
+			pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0),FindTarget(), MyColor(1, 1, 1, 1), 30, 100, 9999999, 100);
 			break;
 		}
 
 	}
 }
 void Team1::Mouse(int button, int state, int x, int y)
+{
+
+}
+void Team1::Key(int key, int x, int y)
 {
 
 }

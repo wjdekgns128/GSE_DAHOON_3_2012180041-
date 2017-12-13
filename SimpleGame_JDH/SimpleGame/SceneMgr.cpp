@@ -1,3 +1,4 @@
+
 #include "stdafx.h"
 #include "SceneMgr.h"
 #include "TexturData.h"
@@ -25,6 +26,10 @@ void SceneMgr::TextureLoad()
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Character.png"), TEX_TEAM_2_CHARACTER);
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/Background.png"), TEX_BACKGROUND);
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/Bullet.png"), TEX_BULLET);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Character_Bullet.png"), TEX_TEAM_1_CHARACTER_ARROW);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Character_Bullet.png"), TEX_TEAM_2_CHARACTER_ARROW);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Character_Defense.png"), TEX_TEAM_1_CHARACTER_DEFENSE);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Character_Defense.png"), TEX_TEAM_2_CHARACTER_DEFENSE);
 }
 void SceneMgr::Init()
 {
@@ -69,7 +74,7 @@ void SceneMgr::Update(DWORD ElapsedTime)
 			pTeam[i]->Update((float)ElapsedTime * 0.001f);
 		}
 	}
-	SceneRenderer->DrawTextW(0, 0, GLUT_BITMAP_TIMES_ROMAN_24, 1, 1, 1, "Test Draw");
+	//SceneRenderer->DrawTextW(0, 0, GLUT_BITMAP_TIMES_ROMAN_24, 1, 1, 1, "Test Draw");
 	CollManager();
 }
 void SceneMgr::CollManager()
@@ -85,23 +90,18 @@ void SceneMgr::CollManager()
 			p[count++] = pTeam[0]->GetObjects()[i];
 			for (int j = 0; j < MAX_OBJECT__COUNT; ++j)
 			{
-				if (pTeam[0]->GetObjects()[i]->getType() == OBJECTTYPE::CHARACHTER)
-				{
-					Character* d = (Character*)pTeam[0]->GetObjects()[i];
-					if(d->getArrows()[j] != NULL)
-					p[count++] = d->getArrows()[j];
-				}
-				else if (pTeam[0]->GetObjects()[i]->getType() == OBJECTTYPE::BUILDING)
+
+				if (pTeam[0]->GetObjects()[i]->getType() == OBJECTTYPE::BUILDING)
 				{
 					Building* d = (Building*)pTeam[0]->GetObjects()[i];
 					if (d->getBullets()[j] != NULL)
-					p[count++] = d->getBullets()[j];
+						p[count++] = d->getBullets()[j];
 				}
 			}
 		}
 	}
-	 count = 0;
-	 count1 = 0;
+	count = 0;
+	count1 = 0;
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pTeam[1]->GetObjects()[i] != NULL)
@@ -109,13 +109,8 @@ void SceneMgr::CollManager()
 			p1[count++] = pTeam[1]->GetObjects()[i];
 			for (int j = 0; j < MAX_OBJECT__COUNT; ++j)
 			{
-				if (pTeam[1]->GetObjects()[i]->getType() == OBJECTTYPE::CHARACHTER)
-				{
-					Character* d = (Character*)pTeam[1]->GetObjects()[i];
-					if (d->getArrows()[j] != NULL)
-						p1[count++] = d->getArrows()[j];
-				}
-				else if (pTeam[1]->GetObjects()[i]->getType() == OBJECTTYPE::BUILDING)
+
+				if (pTeam[1]->GetObjects()[i]->getType() == OBJECTTYPE::BUILDING)
 				{
 					Building* d = (Building*)pTeam[1]->GetObjects()[i];
 					if (d->getBullets()[j] != NULL)
@@ -141,9 +136,19 @@ void SceneMgr::CollManager()
 		}
 	}
 }
+void SceneMgr::Key(int key, int x, int y)
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		if (pTeam[i] != NULL)
+		{
+			pTeam[i]->Key(key, x, y);
+		}
+	}
+}
 void SceneMgr::Render()
 {
-	SceneRenderer->DrawTexturedRect(0,0,0,800,1,1,1,1,TexturData::getinstance().getTextur(TEX_BACKGROUND), LEVEL_BACK);
+	SceneRenderer->DrawTexturedRect(0, 0, 0, 800, 1, 1, 1, 1, TexturData::getinstance().getTextur(TEX_BACKGROUND), LEVEL_BACK);
 	for (int i = 0; i < 2; ++i)
 	{
 		if (pTeam[i] != NULL)

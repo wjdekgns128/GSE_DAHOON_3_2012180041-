@@ -8,7 +8,7 @@ void Building::Update(float timer)
 	dietimer += timer;
 	createBulletTimer += timer;
 
-	if (createBulletTimer >= 5.0f)
+	if (createBulletTimer >= CREATEBUILDINGBULLET)
 	{
 		CreateBullet();
 		createBulletTimer = 0.0f;
@@ -56,7 +56,7 @@ void Building::CreateBullet()
 			MyColor temp;
 			tag == TEAMTAG::TEAM_1 ? temp = t1 : temp = t2;
 
-			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 6, 15, 999999,600); // 크기가 너무작아서 6로 수정.
+			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 6, 60, 999999,400.0f); // 크기가 너무작아서 6로 수정.
 			break;
 		}
 	}
@@ -68,6 +68,7 @@ void Building::CollProcessing(BaseObject* p)
 {
 	switch (p->getType())
 	{
+	case OBJECTTYPE::CHARACHTER_ARROW:
 	case OBJECTTYPE::BULLET:
 	case OBJECTTYPE::CHARACHTER:
 	case OBJECTTYPE::ARROW:

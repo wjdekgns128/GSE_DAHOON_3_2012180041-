@@ -8,23 +8,7 @@ void Character::Update(float timer)
 	waitMoveTimer += timer;
 	if (waitMoveTimer >= waitRandomTimer)
 		vec += (moveVector * timer * speed);
-	createArrowTimer += timer;
-	if (createArrowTimer >= 1.0f)
-	{
-		CreateArrow();
-		createArrowTimer = 0.0f;
-	}
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-	{
-		if (pArrow[i] != NULL)
-		{
-			pArrow[i]->Update(timer);
-			if (pArrow[i]->getState() == 2)
-			{
-				SAFE_DELETE(pArrow[i]);
-			}
-		}
-	}
+	
 	if (dietimer >= lifetime)
 	{
 		state = 2;
@@ -55,28 +39,7 @@ void Character::Render(Renderer* p)
 		NowX, NowY, 6, 2,LEVEL_CHARACTER);
 	p->DrawSolidRectGauge(vec.x, vec.y + 20, vec.z, 30, 6, HpBarColor.r, HpBarColor.g, HpBarColor.b, HpBarColor.a, NowHpBar, LEVEL_UI);
 
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-	{
-		if (pArrow[i] != NULL)
-			pArrow[i]->Render(p);
-	}
-}
 
-void Character::CreateArrow()
-{
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-	{
-		if (pArrow[i] == NULL)
-		{
-			MyColor t1(0.5, 0.2, 0.7, 1);
-			MyColor t2(1, 1, 0, 1);
-			MyColor temp;
-			tag == TEAMTAG::TEAM_1 ? temp = t1 : temp = t2;
-
-			pArrow[i] = new Arrow(OBJECTTYPE::ARROW, tag, vec, temp, 4, 10.0f, 999999, 100); // 크기가 너무작아서 5로 수정.
-			break;
-		}
-	}
 }
 
 void Character::CollProcessing(BaseObject* p)

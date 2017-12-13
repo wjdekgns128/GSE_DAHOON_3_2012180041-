@@ -1,5 +1,7 @@
 #pragma once
 #include "Team.h"
+#include "ObjectMgr.h"
+
 class Team1 : public Team
 {
 protected:
@@ -7,6 +9,7 @@ protected:
 public:
 	Team1()
 	{
+
 		tag = TEAMTAG::TEAM_1;
 		TeamTimer = 0.0f;
 		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
@@ -16,9 +19,10 @@ public:
 		{
 
 			pObject[i] = new Building(OBJECTTYPE::BUILDING, tag, Bullpos[i], MyColor(1, 1, 1, 1),
-				100, 500, 999999);
+				100, 700, 999999);
 
 		}
+		ObjectMgr::getinstance().pushteamObjects(pObject, tag);
 
 	}
 	~Team1()
@@ -30,6 +34,8 @@ public:
 	void Update(float ElapsedTime);
 	void Render(Renderer* p);
 	void Mouse(int button, int state, int x, int y);
+	void Key(int key, int x, int y);
+
 private:
 	void CreateCharacter();
 };
