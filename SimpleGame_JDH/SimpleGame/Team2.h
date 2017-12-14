@@ -21,10 +21,11 @@ public:
 		for (int i = 0; i < 3; ++i)
 		{
 			pObject[i] = new Building(OBJECTTYPE::BUILDING, tag, Bullpos[i], MyColor(1, 1, 1, 1),
-				100, 1000, 999999);
+				100, 700.0f, 999999);
 		}
-		ObjectMgr::getinstance().pushteamObjects(pObject, tag);
-
+		createTimer[0] = CREATECHARACHTER;
+		createTimer[1] = CREATEARROWCHARACHTER;
+		createTimer[2] = CREATEDEFENSECHARACHTER;
 	}
 	~Team2()
 	{

@@ -72,16 +72,14 @@ void CharacterDefense::CollProcessing(BaseObject* p)
 	switch (p->getType())
 	{
 	case OBJECTTYPE::BUILDING:
-		printf("캐릭터삭제\n");
 		state = 2;
 		break;
 	case OBJECTTYPE::ARROW:
 	case OBJECTTYPE::BULLET:
+	case OBJECTTYPE::ARROW_DEFENS:
 		life -= p->getLife();
 		if (life <= 0)
 			state = 2;
-		printf("캐릭터 남은 라이프 %f\n", life);
-
 		break;
 	}
 }

@@ -39,8 +39,8 @@ void Bullet::CollProcessing(BaseObject* p)
 	case OBJECTTYPE::BUILDING:
 	case OBJECTTYPE::CHARACHTER:
 	case OBJECTTYPE::CHARACHTER_ARROW:
+	case OBJECTTYPE::CHARACHTER_DEFENSE:
 		state = 2;
-		printf("bullet ªË¡¶\n");
 
 		break;
 	}

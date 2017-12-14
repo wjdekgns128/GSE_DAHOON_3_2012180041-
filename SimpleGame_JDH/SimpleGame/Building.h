@@ -7,6 +7,7 @@
 class Building : public BaseObject
 {
 private:
+	float createBulletTime;
 	unsigned int TexID;
 	float       createBulletTimer;
 	Bullet*		pBullet[MAX_OBJECT__COUNT];
@@ -23,6 +24,10 @@ public:
 		tag == TEAMTAG::TEAM_1 ?
 			HpBarColor.SetColor(1, 0, 0, 1) :
 			HpBarColor.SetColor(0, 0, 1, 1);
+		if (tag == TEAMTAG::TEAM_1)
+			createBulletTime = CREATEBUILDINGBULLET - 0.5f;
+		else
+			createBulletTime = CREATEBUILDINGBULLET;
 	}
 	
 	~Building()

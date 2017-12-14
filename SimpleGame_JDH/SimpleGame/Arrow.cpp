@@ -32,11 +32,9 @@ void Arrow::CollProcessing(BaseObject* p)
 {
 	switch (p->getType())
 	{
-	case OBJECTTYPE::BUILDING:
+	case OBJECTTYPE::CHARACHTER_DEFENSE:
 	case OBJECTTYPE::CHARACHTER:
 	case OBJECTTYPE::CHARACHTER_ARROW:
-		printf("arrow ªË¡¶\n");
-
 		state = 2;
 		break;
 	}

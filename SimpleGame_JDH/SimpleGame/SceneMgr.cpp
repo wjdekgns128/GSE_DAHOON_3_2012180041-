@@ -83,70 +83,66 @@ void SceneMgr::Update(DWORD ElapsedTime)
 }
 void SceneMgr::CollManager()
 {
-	int count = 0;
-	int count1= 0;
+	int count[2] = { 0, };
 
-	BaseObject** Team1 = NULL;
-	BaseObject** Team2 = NULL;
-	Team1 = ObjectMgr::getinstance().pullteamObjects(TEAMTAG::TEAM_1);
-	Team2 = ObjectMgr::getinstance().pullteamObjects(TEAMTAG::TEAM_2);
-	Team1 = getAllObject(Team1, TEAMTAG::TEAM_1,&count);
-	Team2= getAllObject(Team2, TEAMTAG::TEAM_2,&count1);
-	for (int i = 0; i < count; ++i)
+	BaseObject* TempTeam[2][1000] = { NULL, };
+	for (int j = 0; j < 2; ++j)
 	{
-		for (int j = 0; j < count1; ++j)
+		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 		{
-			if (Team1[i]->CollByObject(Team2[j]))
+			if (pTeam[j]->GetObjects()[i] != NULL)
 			{
-				printf("Ãæµ¹\n");
+				TempTeam[j][count[j]++] = pTeam[j]->GetObjects()[i];
+				Building* P1 = dynamic_cast<Building*>(pTeam[j]->GetObjects()[i]);
+				CharacterArrow* P2 = dynamic_cast<CharacterArrow*>(pTeam[j]->GetObjects()[i]);
+				CharacterDefense* P3 = dynamic_cast<CharacterDefense*>(pTeam[j]->GetObjects()[i]);
+				if (P1 != NULL)
+				{
+					for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+					{
+						if (P1->getBullets()[i] != NULL)
+						{
+							TempTeam[j][count[j]++] = (P1)->getBullets()[i];
+						}
+					}
+				}
+				else if (P2 != NULL)
+				{
+					for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+					{
+						if (P2->getArrow()[i] != NULL)
+						{
+							TempTeam[j][count[j]++] = (P2)->getArrow()[i];
+						}
+					}
+				}
+				else if (P3 != NULL)
+				{
+					for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+					{
+						if (P3->getArrowDefense()[i] != NULL)
+						{
+							TempTeam[j][count[j]++] = (P3)->getArrowDefense()[i];
+						}
+					}
+				}
 			}
 		}
 	}
-}
-BaseObject** SceneMgr::getAllObject(BaseObject** p1, int tag,int* count)
-{
-	BaseObject** ReturnArray = p1;
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+	for (int i = 0; i < count[0]; ++i)
 	{
-		if (p1[i] != NULL)
+		for (int j = 0; j < count[1]; ++j)
 		{
-			Building* P1 = dynamic_cast<Building*>(p1[i]);
-			CharacterArrow* P2 = dynamic_cast<CharacterArrow*>(p1[i]);
-			CharacterDefense* P3 = dynamic_cast<CharacterDefense*>(p1[i]);
-			if (P1 != NULL)
+			if (TempTeam[0][i]->CollByObject(TempTeam[1][j]))
 			{
-				for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-				{
-					if (P1->getBullets()[i] != NULL)
-					{
-						ReturnArray[*count++] = (P1)->getBullets()[i];
-					}
-				}
+				TempTeam[0][i]->CollProcessing(TempTeam[1][j]);
+				TempTeam[1][j]->CollProcessing(TempTeam[0][i]);
 			}
-			else if (P2 != NULL)
-			{
-				for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-				{
-					if (P2->getArrow()[i] != NULL)
-					{
-						ReturnArray[*count++] = (P2)->getArrow()[i];
-					}
-				}
-			}
-			else if (P3 != NULL)
-			{
-				for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-				{
-					if (P3->getArrowDefense()[i] != NULL)
-					{
-						ReturnArray[*count++] = (P3)->getArrowDefense()[i];
-					}
-				}
-			}
-		} 
+		}
 	}
-	return ReturnArray;
+
 }
+
 void SceneMgr::Key(int key, int x, int y)
 {
 	for (int i = 0; i < 2; ++i)

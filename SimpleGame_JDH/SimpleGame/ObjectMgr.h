@@ -8,7 +8,7 @@ class BaseObject;
 class ObjectMgr : public Singleton<ObjectMgr>
 {
 private:
-	BaseObject** team_objects[2][MAX_OBJECT__COUNT];
+	BaseObject* team_objects[2][MAX_OBJECT__COUNT];
 
 public:
 	ObjectMgr()
@@ -24,12 +24,12 @@ public:
 	{
 		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 		{
-			team_objects[tag][i] = &p[i];
+			team_objects[tag][i] = p[i];
 		}
 	}
 	BaseObject**  pullteamObjects(int tag)
 	{
-		return *team_objects[tag];
+		return team_objects[tag];
 	}
 
 };

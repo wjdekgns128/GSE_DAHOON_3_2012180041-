@@ -1,7 +1,7 @@
 #pragma once
 #include "Team.h"
 #include "ObjectMgr.h"
-
+#include <ctime>
 class Team1 : public Team
 {
 protected:
@@ -9,7 +9,7 @@ protected:
 public:
 	Team1()
 	{
-
+		srand((unsigned int)time(NULL));
 		tag = TEAMTAG::TEAM_1;
 		TeamTimer = 0.0f;
 		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
@@ -19,11 +19,13 @@ public:
 		{
 
 			pObject[i] = new Building(OBJECTTYPE::BUILDING, tag, Bullpos[i], MyColor(1, 1, 1, 1),
-				100, 1000, 999999);
+				100, 700.0f, 999999);
 
 		}
-		ObjectMgr::getinstance().pushteamObjects(pObject, tag);
-
+		createTimer[0] = CREATECHARACHTER - 0.5f;
+		createTimer[1] = CREATEARROWCHARACHTER - 0.5f;
+		createTimer[2] = CREATEDEFENSECHARACHTER -0.5f;
+	
 	}
 	~Team1()
 	{
@@ -39,5 +41,6 @@ public:
 private:
 	void CreateCharacter();
 	void RenderSelect(Renderer* p);
-
+	
+	void FindCreateObjectType();
 };

@@ -23,9 +23,7 @@ public:
 		selectR_Color[0] = 1.0f;
 		selectR_Color[1] = 0;
 		selectR_Color[2] = 0;
-		createTimer[0] = CREATECHARACHTER;
-		createTimer[1] = CREATEARROWCHARACHTER;
-		createTimer[2] = CREATEDEFENSECHARACHTER;
+
 		TeamTimer = 0.0f;
 		CreateKeyType = 0;
 	}
