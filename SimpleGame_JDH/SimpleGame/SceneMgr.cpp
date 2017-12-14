@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "SceneMgr.h"
 #include "TexturData.h"
+#include "ObjectMgr.h"
 SceneMgr::SceneMgr()
 {
 	SceneRenderer = NULL;
@@ -79,62 +80,70 @@ void SceneMgr::Update(DWORD ElapsedTime)
 }
 void SceneMgr::CollManager()
 {
+	int taem1count = 0;
+	int team2count = 0;
+	BaseObject** p = NULL;
+	p = getAllObject(TEAMTAG::TEAM_1);
+	BaseObject** p1 = NULL;
+	p1 = getAllObject(TEAMTAG::TEAM_2);
+
+	for (int i = 0; i < 1500; ++i)
+	{
+		for (int j = 0; j < 1500; ++j)
+		{
+
+		}
+	}
+}
+BaseObject** SceneMgr::getAllObject(int tag)
+{
 	int count = 0;
-	int count1 = 0;
-	BaseObject* p[500] = { NULL, };
-	BaseObject* p1[500] = { NULL, };
+	BaseObject** p = { NULL, };
+	BaseObject* ReturnArray[1500] = { NULL, };
+	p = ObjectMgr::getinstance().pullteamObjects(tag);
+
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
-		if (pTeam[0]->GetObjects()[i] != NULL)
+		if (p[i] != NULL)
 		{
-			p[count++] = pTeam[0]->GetObjects()[i];
-			for (int j = 0; j < MAX_OBJECT__COUNT; ++j)
-			{
+			ReturnArray[count++] = p[i];
+			Building* P1 = dynamic_cast<Building*>(p[i]);
+			CharacterArrow* P2 = dynamic_cast<CharacterArrow*>(p[i]);
+			CharacterDefense* P3 = dynamic_cast<CharacterDefense*>(p[i]);
 
-				if (pTeam[0]->GetObjects()[i]->getType() == OBJECTTYPE::BUILDING)
-				{
-					Building* d = (Building*)pTeam[0]->GetObjects()[i];
-					if (d->getBullets()[j] != NULL)
-						p[count++] = d->getBullets()[j];
-				}
-			}
-		}
-	}
-	count = 0;
-	count1 = 0;
-	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-	{
-		if (pTeam[1]->GetObjects()[i] != NULL)
-		{
-			p1[count++] = pTeam[1]->GetObjects()[i];
-			for (int j = 0; j < MAX_OBJECT__COUNT; ++j)
+			if (P1 != NULL)
 			{
-
-				if (pTeam[1]->GetObjects()[i]->getType() == OBJECTTYPE::BUILDING)
+				for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 				{
-					Building* d = (Building*)pTeam[1]->GetObjects()[i];
-					if (d->getBullets()[j] != NULL)
-						p1[count++] = d->getBullets()[j];
-				}
-			}
-		}
-	}
-	for (int i = 0; i < 500; ++i)
-	{
-		for (int j = 0; j < 500; ++j)
-		{
-			if (p[i] != NULL)
-			{
-				if (p1[j] != NULL)
-					if (p[i]->CollByObject(p1[j]))
+					if (P1->getBullets()[i] != NULL)
 					{
-						p[i]->CollProcessing(p1[j]);
-						p1[j]->CollProcessing(p[i]);
+						ReturnArray[count++] = P1->getBullets()[i];
 					}
-
+				}
 			}
-		}
+			else if (P2 != NULL)
+			{
+				for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+				{
+					if (P2->getArrow()[i] != NULL)
+					{
+						ReturnArray[count++] = P2->getArrow()[i];
+					}
+				}
+			}
+			else if (P3 != NULL)
+			{
+				for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
+				{
+					if (P3->getArrowDefense()[i] != NULL)
+					{
+						ReturnArray[count++] = P3->getArrowDefense()[i];
+					}
+				}
+			}
+		} 
 	}
+	return ReturnArray;
 }
 void SceneMgr::Key(int key, int x, int y)
 {

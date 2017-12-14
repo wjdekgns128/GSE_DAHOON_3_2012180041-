@@ -9,7 +9,7 @@
 class CharacterDefense : public BaseObject
 {
 private:
-	Arrow*		pArrow[300];
+	Arrow*		pArrow[MAX_OBJECT__COUNT];
 	MyColor   HpBarColor;
 	MyVector moveVector;
 	unsigned int TexID;
@@ -23,7 +23,7 @@ public:
 	CharacterDefense(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyColor color, float size, float life, float lifetime, float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
 	{
 		CreateArrowTimer = 0.0f;
-		for (int i = 0; i < 300; ++i)
+		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 			pArrow[i] = NULL;
 		NowX = 0;
 		NowY = 0;
@@ -40,12 +40,12 @@ public:
 
 	~CharacterDefense()
 	{
-		for (int i = 0; i < 300; ++i)
+		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 			SAFE_DELETE(pArrow[i]);
 	}
 
 public:
-
+	Arrow** getArrowDefense() { return pArrow; }
 public:
 	void Update(float timer);
 	void Render(Renderer* p);

@@ -14,7 +14,7 @@ void CharacterDefense::Update(float timer)
 	{
 		state = 2;
 	}
-	for (int i = 0; i < 300; ++i)
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pArrow[i] != NULL)
 		{
@@ -56,7 +56,7 @@ void CharacterDefense::Render(Renderer* p)
 }
 void CharacterDefense::CreateArrow()
 {
-	for (int i = 0; i < 300; ++i)
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pArrow[i] == NULL)
 		{

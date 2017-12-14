@@ -16,7 +16,7 @@ void CharacterArrow::Update(float timer)
 		state = 2;
 	}
 	PlayAnimator(timer);
-	for (int i = 0; i < 300; ++i)
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pArrow[i] != NULL)
 		{
@@ -61,7 +61,7 @@ void CharacterArrow::Render(Renderer* p)
 }
 void CharacterArrow::CreateArrow()
 {
-	for (int i = 0; i < 300; ++i)
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pArrow[i] == NULL)
 		{

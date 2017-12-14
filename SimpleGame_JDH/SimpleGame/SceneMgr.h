@@ -25,11 +25,11 @@ public:
 	void Update(DWORD ElapsedTime);
 	void Render();
 	void CollManager();
+	BaseObject** getAllObject(int tag);
 
-	
 	void Mouse(int button, int state, int x, int y);
 	void Key(int key, int x, int y);
-
+	
 private:
 	void TextureLoad();
 };
