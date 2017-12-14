@@ -28,7 +28,7 @@ public:
 		for (int i = 0; i < 3; ++i)
 		{
 			pObject[i] = new Building(OBJECTTYPE::BUILDING, tag, Bullpos[i], MyColor(1, 1, 1, 1),
-				100, 700, 999999);
+				100, 1000, 999999);
 		}
 
 	}

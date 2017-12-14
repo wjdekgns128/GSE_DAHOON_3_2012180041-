@@ -3,7 +3,9 @@
 #include "Arrow.h"
 #include "BaseObject.h"
 #include "TexturData.h"
-//// 돌진형
+#include "ObjectMgr.h"
+
+//// 돌진형 빌딩에만 공격.
 class Character : public BaseObject
 {
 private:
@@ -19,7 +21,7 @@ private:
 	float			AnimatorTime;
 
 public:
-	Character(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyVector Target, MyColor color, float size, float life, float lifetime, float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
+	Character(OBJECTTYPE type, TEAMTAG tag, MyVector vec,MyColor color, float size, float life, float lifetime, float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
 	{
 		NowX = 0;
 		NowY = 0;
@@ -28,7 +30,11 @@ public:
 		waitMoveTimer = 0.0f;
 		printf("기달리는 시간 : %d\n", waitRandomTimer);
 
-		moveVector = Target - vec;
+		moveVector = GetMinDisByMaskObjects(1,
+			PRIORITY(OBJECTTYPE::BUILDING, 1.0f));
+		if (moveVector.x == -9999)
+			state = 2;
+		moveVector = (moveVector - vec);
 		moveVector.Nomalizing();
 
 		tag == TEAMTAG::TEAM_1 ?

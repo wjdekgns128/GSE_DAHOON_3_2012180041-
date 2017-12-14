@@ -62,6 +62,7 @@ public:
 
 		float Temp = 9999999;
 		MyVector returnVec;
+		returnVec.Setting(-9999, -9999, -9999);
 		va_list ap;
 		va_start(ap, args);
 		int count = 0;

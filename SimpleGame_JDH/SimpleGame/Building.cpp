@@ -34,7 +34,7 @@ void Building::Render(Renderer* p)
 	if (state != 1)
 		return;
 	
-	float NowHpBar =life / 500.f;
+	float NowHpBar =life / 1000.0f;
 	p->DrawTexturedRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, TexID,LEVEL_BUILDING);
 	p->DrawSolidRectGauge(vec.x, vec.y + 65, vec.z, 80, 15, HpBarColor.r,HpBarColor.g,HpBarColor.b,HpBarColor.a, NowHpBar, LEVEL_UI);
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
@@ -56,7 +56,7 @@ void Building::CreateBullet()
 			MyColor temp;
 			tag == TEAMTAG::TEAM_1 ? temp = t1 : temp = t2;
 
-			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 6, 60, 999999,400.0f); // 크기가 너무작아서 6로 수정.
+			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 6, 60, 999999,600.0f); // 크기가 너무작아서 6로 수정.
 			break;
 		}
 	}

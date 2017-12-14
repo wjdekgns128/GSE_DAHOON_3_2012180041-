@@ -3,6 +3,7 @@
 #include "Building.h"
 #include "Character.h"
 #include "CharacterArrow.h"
+#include "CharacterDefense.h"
 class Team
 {
 protected:
@@ -29,31 +30,7 @@ public:
 	virtual void Mouse(int button, int state, int x, int y) = 0;
 	virtual void Key(int key, int x, int y) = 0;
 protected:
-	MyVector FindTarget() // Ä³¸¯ÅÍ Å¸°Ù ÁÂÇ¥
-	{
-		int number = 0;
-		BaseObject*		tempObject[5];
-		for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
-		{
-			if (pObject[i] != NULL)
-			{
-				if (pObject[i]->getType() == OBJECTTYPE::BUILDING)
-					tempObject[number++] = pObject[i];
-			}
-			
-		}
-		if (number != 0)
-		{
-			int n = rand() % number;
-			MyVector tempvector = tempObject[n]->getMyVector();
-			tempvector.y *= -1;
-			return tempvector;
-
-		}
-
-		return MyVector(0, 0, 0);
-		
-	}
+	
 public:
 #pragma region get,set
 	BaseObject** GetObjects()

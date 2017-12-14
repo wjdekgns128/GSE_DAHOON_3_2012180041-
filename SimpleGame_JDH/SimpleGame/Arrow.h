@@ -1,16 +1,31 @@
 #pragma once
 #include <stdio.h>
 #include "BaseObject.h"
+// ÃÖ¿ì¼±À¸·Î ÃÑ - > µðÆæ´õ
 class Arrow : public BaseObject
 {
 private:
+
 	MyVector moveVector;
 public:
 	Arrow(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyColor color, float size, float life, float lifetime, float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
 	{
-		float y = (rand() % 500);
-		tag == TEAMTAG::TEAM_1 ? y *= -1 : y = y;
-		moveVector.Setting(rand() % 10 - 5, y, 0);
+		if (type == OBJECTTYPE::ARROW)
+		{
+			moveVector = GetMinDisByMaskObjects(2,
+				PRIORITY(OBJECTTYPE::CHARACHTER_ARROW, 0.5f),
+				PRIORITY(OBJECTTYPE::CHARACHTER_DEFENSE, 1.5f));
+		}
+		else if (type == OBJECTTYPE::ARROW_DEFENS)
+		{
+			moveVector = GetMinDisByMaskObjects(2,
+				PRIORITY(OBJECTTYPE::CHARACHTER, 0.2f),
+				PRIORITY(OBJECTTYPE::CHARACHTER_ARROW, 1.5f));
+		}
+
+		if (moveVector.x == -9999)
+			state = 2;
+		moveVector = (moveVector - vec);
 		moveVector.Nomalizing();
 		dietimer = 0.0f;
 	}

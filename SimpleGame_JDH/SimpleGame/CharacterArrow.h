@@ -3,7 +3,9 @@
 #include "Arrow.h"
 #include "BaseObject.h"
 #include "TexturData.h"
-//// µ¹ÁøÇü
+#include "ObjectMgr.h"
+
+//// ÃÑ½ô ( ÃÑ½î´Â³ð ÃÖ¿ì¼±) - > µðÆæ´õ -> ¾øÀ¸¸é ºôµù¿¡ °ø°Ý
 class CharacterArrow : public BaseObject
 {
 private:
@@ -18,7 +20,7 @@ private:
 	float			AnimatorTime;
 
 public:
-	CharacterArrow(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyVector Target, MyColor color, float size, float life, float lifetime, float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
+	CharacterArrow(OBJECTTYPE type, TEAMTAG tag, MyVector vec, MyColor color, float size, float life, float lifetime, float speed) : BaseObject(type, tag, vec, color, size, life, lifetime, speed)
 	{
 		CreateArrowTimer = 0.0f;
 		for (int i = 0; i < 300; ++i)
@@ -26,8 +28,12 @@ public:
 		NowX = 0;
 		NowY = 0;
 		AnimatorTime = 0.0f;
-		moveVector = Target - vec;
+		moveVector = GetMinDisByMaskObjects(1,
+			PRIORITY(OBJECTTYPE::BUILDING, 1.0f));
+
+		moveVector = (moveVector - vec);
 		moveVector.Nomalizing();
+
 
 		tag == TEAMTAG::TEAM_1 ?
 			HpBarColor.SetColor(1, 0, 0, 1) :

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "BaseObject.h"
 #include "ObjectMgr.h"
+// 최우선으로 디펜더 -> 빌딩 -> 캐릭터 - > 총쏘는 캐릭터 공격
 class Bullet : public BaseObject
 {
 private:
@@ -14,11 +15,12 @@ public:
 	//이 부분 수정
 		dietimer = 0.0f;
 		moveVector = GetMinDisByMaskObjects(4,
-			PRIORITY(OBJECTTYPE::CHARACHTER_DEFENSE, 1.0f),
-			PRIORITY(OBJECTTYPE::CHARACHTER, 2.2f), 
-			PRIORITY(OBJECTTYPE::CHARACHTER_ARROW, 2.7f), 
-			PRIORITY(OBJECTTYPE::BUILDING, 2.5f));
-
+			PRIORITY(OBJECTTYPE::CHARACHTER_DEFENSE, 0.2f),
+			PRIORITY(OBJECTTYPE::CHARACHTER, 2.4f), 
+			PRIORITY(OBJECTTYPE::CHARACHTER_ARROW, 3.6f), 
+			PRIORITY(OBJECTTYPE::BUILDING, 1.7f));
+		if (moveVector.x == -9999)
+			state = 2;
 		moveVector = (moveVector -vec );
 		moveVector.Nomalizing();
 

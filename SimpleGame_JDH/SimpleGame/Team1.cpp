@@ -41,7 +41,7 @@ void Team1::CreateCharacter()
 	{
 		if (pObject[i] == NULL)
 		{
-			pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0),FindTarget(), MyColor(1, 1, 1, 1), 30, 100, 9999999, 100);
+			pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0), MyColor(1, 1, 1, 1), 30, 100, 9999999, 50.0f);
 			break;
 		}
 

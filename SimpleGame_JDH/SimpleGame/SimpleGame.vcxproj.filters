@@ -126,6 +126,9 @@
     <ClInclude Include="ObjectMgr.h">
       <Filter>data\My\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterDefense.h">
+      <Filter>data\My\Object\CharacterDefense</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -166,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="CharacterArrow.cpp">
       <Filter>data\My\Object\CharacterArrow</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterDefense.cpp">
+      <Filter>data\My\Object\CharacterDefense</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
