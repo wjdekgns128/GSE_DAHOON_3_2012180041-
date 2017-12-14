@@ -22,6 +22,7 @@ public:
 				100, 1000, 999999);
 
 		}
+		ObjectMgr::getinstance().pushteamObjects(pObject, tag);
 
 	}
 	~Team1()

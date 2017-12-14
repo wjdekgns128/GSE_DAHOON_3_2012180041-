@@ -3,7 +3,6 @@
 
 void Team1::Update(float ElapsedTime)
 {
-	ObjectMgr::getinstance().pushteamObjects(pObject, tag);
 
 	TeamTimer += ElapsedTime;
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)

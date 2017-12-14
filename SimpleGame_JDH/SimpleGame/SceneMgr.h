@@ -26,7 +26,7 @@ public:
 	void Update(DWORD ElapsedTime);
 	void Render();
 	void CollManager();
-	BaseObject** getAllObject(int tag);
+	BaseObject** getAllObject(BaseObject** p1, int tag,int* count);
 
 	void Mouse(int button, int state, int x, int y);
 	void Key(int key, int x, int y);

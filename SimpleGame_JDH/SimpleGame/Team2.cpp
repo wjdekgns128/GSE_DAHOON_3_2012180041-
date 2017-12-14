@@ -5,7 +5,6 @@
 
 void Team2::Update(float ElapsedTime)
 {
-	ObjectMgr::getinstance().pushteamObjects(pObject, tag);
 
 	TeamTimer += ElapsedTime;
 	selectTimer += ElapsedTime;

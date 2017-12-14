@@ -83,53 +83,43 @@ void SceneMgr::Update(DWORD ElapsedTime)
 }
 void SceneMgr::CollManager()
 {
-	int taem1count = 0;
-	int team2count = 0;
-	BaseObject** t = NULL;
-	BaseObject** t1 = NULL;
-	t = getAllObject(TEAMTAG::TEAM_1);
-	t1 = getAllObject(TEAMTAG::TEAM_2);
+	int count = 0;
+	int count1= 0;
 
-
-	for (int i = 0; i < 1000; ++i)
+	BaseObject** Team1 = NULL;
+	BaseObject** Team2 = NULL;
+	Team1 = ObjectMgr::getinstance().pullteamObjects(TEAMTAG::TEAM_1);
+	Team2 = ObjectMgr::getinstance().pullteamObjects(TEAMTAG::TEAM_2);
+	Team1 = getAllObject(Team1, TEAMTAG::TEAM_1,&count);
+	Team2= getAllObject(Team2, TEAMTAG::TEAM_2,&count1);
+	for (int i = 0; i < count; ++i)
 	{
-		for (int j = 0; j < 1000; ++j)
+		for (int j = 0; j < count1; ++j)
 		{
-			if (t[i] != NULL)
+			if (Team1[i]->CollByObject(Team2[j]))
 			{
-				if (t1[j] != NULL)
-				{
-					if (t[i]->CollByObject(t1[j]))
-						printf("Eqweq\n");
-				}
+				printf("Ãæµ¹\n");
 			}
 		}
 	}
-
 }
-BaseObject** SceneMgr::getAllObject(int tag)
+BaseObject** SceneMgr::getAllObject(BaseObject** p1, int tag,int* count)
 {
-	int count = 0;
-	BaseObject** p = { NULL, };
-	BaseObject* ReturnArray[1000] = { NULL, };
-	p = ObjectMgr::getinstance().pullteamObjects(tag);
-
+	BaseObject** ReturnArray = p1;
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
-		if (p[i] != NULL)
+		if (p1[i] != NULL)
 		{
-			ReturnArray[count++] = p[i];
-			Building* P1 = dynamic_cast<Building*>(p[i]);
-			CharacterArrow* P2 = dynamic_cast<CharacterArrow*>(p[i]);
-			CharacterDefense* P3 = dynamic_cast<CharacterDefense*>(p[i]);
-
+			Building* P1 = dynamic_cast<Building*>(p1[i]);
+			CharacterArrow* P2 = dynamic_cast<CharacterArrow*>(p1[i]);
+			CharacterDefense* P3 = dynamic_cast<CharacterDefense*>(p1[i]);
 			if (P1 != NULL)
 			{
 				for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 				{
 					if (P1->getBullets()[i] != NULL)
 					{
-						ReturnArray[count++] = P1->getBullets()[i];
+						ReturnArray[*count++] = (P1)->getBullets()[i];
 					}
 				}
 			}
@@ -139,7 +129,7 @@ BaseObject** SceneMgr::getAllObject(int tag)
 				{
 					if (P2->getArrow()[i] != NULL)
 					{
-						ReturnArray[count++] = P2->getArrow()[i];
+						ReturnArray[*count++] = (P2)->getArrow()[i];
 					}
 				}
 			}
@@ -149,7 +139,7 @@ BaseObject** SceneMgr::getAllObject(int tag)
 				{
 					if (P3->getArrowDefense()[i] != NULL)
 					{
-						ReturnArray[count++] = P3->getArrowDefense()[i];
+						ReturnArray[*count++] = (P3)->getArrowDefense()[i];
 					}
 				}
 			}

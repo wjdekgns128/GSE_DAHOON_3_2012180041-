@@ -23,6 +23,7 @@ public:
 			pObject[i] = new Building(OBJECTTYPE::BUILDING, tag, Bullpos[i], MyColor(1, 1, 1, 1),
 				100, 1000, 999999);
 		}
+		ObjectMgr::getinstance().pushteamObjects(pObject, tag);
 
 	}
 	~Team2()
