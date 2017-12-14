@@ -8,6 +8,10 @@
 #include<cstdarg>
 class  BaseObject
 {
+public:
+	MyVector moveVector;
+	float     speed;
+
 protected:
 	float dietimer;
 
@@ -20,7 +24,6 @@ protected:
 	float      life;
 	float      lifetime;
 	float      timer;
-	float     speed;
 public:
 	BaseObject(OBJECTTYPE type,TEAMTAG tag,MyVector vec,MyColor color,float size,float life,float lifetime,float speed) : size(size),type(type),vec(vec),color(color),life(life) , tag(tag),speed(speed), lifetime(lifetime)
 	{
@@ -103,7 +106,7 @@ public:
 					if (dis < Temp)
 					{
 						Temp = dis;
-						returnVec = p[i]->getMyVector();
+						returnVec = p[i]->getMyVector() ;
 					}
 				}
 			}
@@ -114,17 +117,17 @@ public:
 	
 	bool CollByObject(BaseObject* p) // 충돌체크
 	{
-		if (p->getState() == 2)
+		if ((p)->getState() == 2)
 			return false;
 		float left = vec.x - size / 2.0f;
 		float top = vec.y - size / 2.0f;
 		float right = vec.x + size / 2.0f;
 		float bottom = vec.y + size / 2.0f;
 
-		float left1 = p->vec.x - p->size / 2.0f;
-		float top1 = p->vec.y - p->size / 2.0f;
-		float right1 = p->vec.x + p->size / 2.0f;
-		float bottom1 = p->vec.y + p->size / 2.0f;
+		float left1 = (p)->vec.x - (p)->size / 2.0f;
+		float top1 = (p)->vec.y - (p)->size / 2.0f;
+		float right1 = (p)->vec.x + (p)->size / 2.0f;
+		float bottom1 = (p)->vec.y + (p)->size / 2.0f;
 		if (left	<	right1	&&
 			top	<	bottom1	&&
 			right	>	left1	&&

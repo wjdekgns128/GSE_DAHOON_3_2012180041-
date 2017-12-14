@@ -5,6 +5,7 @@
 #include "ObjectMgr.h"
 SceneMgr::SceneMgr()
 {
+	climateTime = 0.0f;
 	SceneRenderer = NULL;
 	pSound = NULL;
 	for (int i = 0; i < 2; ++i)
@@ -31,6 +32,7 @@ void SceneMgr::TextureLoad()
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Character_Bullet.png"), TEX_TEAM_2_CHARACTER_ARROW);
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM1_Character_Defense.png"), TEX_TEAM_1_CHARACTER_DEFENSE);
 	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/TEAM2_Character_Defense.png"), TEX_TEAM_2_CHARACTER_DEFENSE);
+	TexturData::getinstance().Input(SceneRenderer->CreatePngTexture("res/rain.png"), TEX_RAIN);
 }
 void SceneMgr::Init()
 {
@@ -76,30 +78,40 @@ void SceneMgr::Update(DWORD ElapsedTime)
 		}
 	}
 	//SceneRenderer->DrawTextW(0, 0, GLUT_BITMAP_TIMES_ROMAN_24, 1, 1, 1, "Test Draw");
+	climateTime += (float)ElapsedTime * 0.001f;
 	CollManager();
 }
 void SceneMgr::CollManager()
 {
 	int taem1count = 0;
 	int team2count = 0;
-	BaseObject** p = NULL;
-	p = getAllObject(TEAMTAG::TEAM_1);
-	BaseObject** p1 = NULL;
-	p1 = getAllObject(TEAMTAG::TEAM_2);
+	BaseObject** t = NULL;
+	BaseObject** t1 = NULL;
+	t = getAllObject(TEAMTAG::TEAM_1);
+	t1 = getAllObject(TEAMTAG::TEAM_2);
 
-	for (int i = 0; i < 1500; ++i)
+
+	for (int i = 0; i < 1000; ++i)
 	{
-		for (int j = 0; j < 1500; ++j)
+		for (int j = 0; j < 1000; ++j)
 		{
-
+			if (t[i] != NULL)
+			{
+				if (t1[j] != NULL)
+				{
+					if (t[i]->CollByObject(t1[j]))
+						printf("Eqweq\n");
+				}
+			}
 		}
 	}
+
 }
 BaseObject** SceneMgr::getAllObject(int tag)
 {
 	int count = 0;
 	BaseObject** p = { NULL, };
-	BaseObject* ReturnArray[1500] = { NULL, };
+	BaseObject* ReturnArray[1000] = { NULL, };
 	p = ObjectMgr::getinstance().pullteamObjects(tag);
 
 	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
@@ -165,6 +177,8 @@ void SceneMgr::Render()
 			pTeam[i]->Render(SceneRenderer);
 		}
 	}
+	SceneRenderer->DrawParticleClimate(0, 0, 0, 1.0f, 1, 1, 1, 1, -0.2f, -0.2f,
+		TexturData::getinstance().getTextur(TEX_RAIN), climateTime, 0.01);
 }
 void SceneMgr::Mouse(int button, int state, int x, int y)
 {

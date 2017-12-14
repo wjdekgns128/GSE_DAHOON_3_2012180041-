@@ -25,10 +25,10 @@ void Bullet::Render(Renderer* p)
 {
 	if (state != 1)
 		return;
-	float tempy = tag == TEAMTAG::TEAM_1 ? -5 : 5;
 	p->DrawSolidRect(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, LEVEL_BULLET);
-	p->DrawParticle(vec.x, vec.y - tempy, vec.z, size, 1,1,1,1, moveVector.x * -2, moveVector.y * -5,
-		TexturData::getinstance().getTextur(TEX_BULLET), ParticleTime);
+	p->DrawParticle(vec.x, vec.y, vec.z, size, 1,1,1,1,
+		moveVector.x * -1 , moveVector.y * -1 ,
+		TexturData::getinstance().getTextur(TEX_BULLET), ParticleTime,LEVEL_BULLET + 0.1f);
 }
 
 

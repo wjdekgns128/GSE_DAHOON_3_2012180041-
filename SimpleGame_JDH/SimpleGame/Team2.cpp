@@ -102,13 +102,13 @@ void Team2::CreateCharacter(int x, int y)
 			switch (CreateKeyType)
 			{
 			case 0:
-				pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0), MyColor(1, 1, 1, 1), 30.0f, 100.0f, 9999999.0f, 50.0f);
+				pObject[i] = new Character(OBJECTTYPE::CHARACHTER, tag, MyVector(x, y, 0), MyColor(1, 1, 1, 1), 40.0f, 150.0f, 9999999.0f, 35.0f);
 				return;
 			case 1:
-				pObject[i] = new CharacterArrow(OBJECTTYPE::CHARACHTER_ARROW, tag, MyVector(x, y, 0), MyColor(1, 1, 1, 1), 30.0f, 300.0f, 9999999.0f, 5.0f);
+				pObject[i] = new CharacterArrow(OBJECTTYPE::CHARACHTER_ARROW, tag, MyVector(x, y, 0), MyColor(1, 1, 1, 1), 40.0f, 300.0f, 9999999.0f, 5.0f);
 				return;
 			case 2:
-				pObject[i] = new CharacterDefense(OBJECTTYPE::CHARACHTER_DEFENSE, tag, MyVector(x, y, 0), MyColor(1, 1, 1, 1), 30.0f, 250.0f, 99999999.0f, 0.0f);
+				pObject[i] = new CharacterDefense(OBJECTTYPE::CHARACHTER_DEFENSE, tag, MyVector(x, y, 0), MyColor(1, 1, 1, 1), 40.0f, 250.0f, 99999999.0f, 0.0f);
 				return;
 			}
 		}

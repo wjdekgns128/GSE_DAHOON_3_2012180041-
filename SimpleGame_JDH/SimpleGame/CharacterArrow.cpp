@@ -7,7 +7,7 @@ void CharacterArrow::Update(float timer)
 	CreateArrowTimer += timer;
 	dietimer += timer;
 	vec += (moveVector * timer * speed);
-	if (CreateArrowTimer > 2.2f)
+	if (CreateArrowTimer > CREATEARROW)
 	{
 		CreateArrow();
 	}
@@ -52,7 +52,7 @@ void CharacterArrow::Render(Renderer* p)
 	p->DrawTexturedRectSeq(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, TexID,
 		NowX, NowY, 6, 2, LEVEL_CHARACTER);
 	p->DrawSolidRectGauge(vec.x, vec.y + 20, vec.z, 30, 6, HpBarColor.r, HpBarColor.g, HpBarColor.b, HpBarColor.a, NowHpBar, LEVEL_UI);
-	for (int i = 0; i < 300; ++i)
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pArrow[i] != NULL)
 			pArrow[i]->Render(p);
@@ -65,7 +65,7 @@ void CharacterArrow::CreateArrow()
 	{
 		if (pArrow[i] == NULL)
 		{
-			pArrow[i] = new Arrow(OBJECTTYPE::ARROW, tag, vec, color, 5.0f, 40.0f, 99999999.0f, 250.0f);
+			pArrow[i] = new Arrow(OBJECTTYPE::ARROW, tag, vec, MyColor(0.0f,0.0f, 0.0f,1.0f), 7.0f, 40.0f, 99999999.0f, 750.0f);
 			CreateArrowTimer = 0.0f;
 			break;
 		}

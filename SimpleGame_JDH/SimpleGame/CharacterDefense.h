@@ -11,7 +11,6 @@ class CharacterDefense : public BaseObject
 private:
 	Arrow*		pArrow[MAX_OBJECT__COUNT];
 	MyColor   HpBarColor;
-	MyVector moveVector;
 	unsigned int TexID;
 
 	float CreateArrowTimer;

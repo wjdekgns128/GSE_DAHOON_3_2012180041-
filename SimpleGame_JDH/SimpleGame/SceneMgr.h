@@ -12,6 +12,7 @@
 class SceneMgr
 {
 private:
+	float		climateTime;
 	Sound*		pSound;
 	Renderer *SceneRenderer;
 	Team*		pTeam[2];

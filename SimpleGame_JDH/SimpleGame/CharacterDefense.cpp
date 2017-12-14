@@ -47,7 +47,7 @@ void CharacterDefense::Render(Renderer* p)
 	p->DrawTexturedRectSeq(vec.x, vec.y, vec.z, size, color.r, color.g, color.b, color.a, TexID,
 		NowX, NowY, 6, 2, LEVEL_CHARACTER);
 	p->DrawSolidRectGauge(vec.x, vec.y + 20, vec.z, 30, 6, HpBarColor.r, HpBarColor.g, HpBarColor.b, HpBarColor.a, NowHpBar, LEVEL_UI);
-	for (int i = 0; i < 300; ++i)
+	for (int i = 0; i < MAX_OBJECT__COUNT; ++i)
 	{
 		if (pArrow[i] != NULL)
 			pArrow[i]->Render(p);
@@ -60,7 +60,7 @@ void CharacterDefense::CreateArrow()
 	{
 		if (pArrow[i] == NULL)
 		{
-			pArrow[i] = new Arrow(OBJECTTYPE::ARROW_DEFENS, tag, vec, MyColor(1,0,1,1), 10.0f, 99999.0F, 99999999.0f, 1000.0f);
+			pArrow[i] = new Arrow(OBJECTTYPE::ARROW_DEFENS, tag, vec, MyColor(1,0,0.5f,1), 10.0f, 99999.0F, 99999999.0f, 1000.0f);
 			CreateArrowTimer = 0.0f;
 			break;
 		}

@@ -51,12 +51,8 @@ void Building::CreateBullet()
 	{
 		if (pBullet[i] == NULL)
 		{
-			MyColor t1(1,0,0,1);
-			MyColor t2(0, 0, 1, 1);
-			MyColor temp;
-			tag == TEAMTAG::TEAM_1 ? temp = t1 : temp = t2;
 
-			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, temp, 6, 60, 999999,600.0f); // 크기가 너무작아서 6로 수정.
+			pBullet[i] = new Bullet(OBJECTTYPE::BULLET, tag, vec, MyColor(0,0,0,1), 6, 60, 999999,600.0f); // 크기가 너무작아서 6로 수정.
 			break;
 		}
 	}

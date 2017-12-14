@@ -7,6 +7,9 @@
 class Team
 {
 protected:
+	int   selectScale;
+	float	selectTimer;
+	float selectR_Color[3];
 	float createTimer[3];
 	int	CreateKeyType;
 	float  TeamTimer;
@@ -15,6 +18,11 @@ protected:
 public:
 	Team()
 	{
+		selectScale = 1;
+		selectTimer = 0.0f;
+		selectR_Color[0] = 1.0f;
+		selectR_Color[1] = 0;
+		selectR_Color[2] = 0;
 		createTimer[0] = CREATECHARACHTER;
 		createTimer[1] = CREATEARROWCHARACHTER;
 		createTimer[2] = CREATEDEFENSECHARACHTER;

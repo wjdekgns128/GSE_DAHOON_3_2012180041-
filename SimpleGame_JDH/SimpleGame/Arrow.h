@@ -12,9 +12,10 @@ public:
 	{
 		if (type == OBJECTTYPE::ARROW)
 		{
-			moveVector = GetMinDisByMaskObjects(2,
+			moveVector = GetMinDisByMaskObjects(3,
 				PRIORITY(OBJECTTYPE::CHARACHTER_ARROW, 0.5f),
-				PRIORITY(OBJECTTYPE::CHARACHTER_DEFENSE, 1.5f));
+				PRIORITY(OBJECTTYPE::CHARACHTER_DEFENSE, 1.5f),
+				PRIORITY(OBJECTTYPE::CHARACHTER, 1.7f));
 		}
 		else if (type == OBJECTTYPE::ARROW_DEFENS)
 		{

@@ -37,4 +37,6 @@ public:
 
 private:
 	void CreateCharacter();
+	void RenderSelect(Renderer* p);
+
 };

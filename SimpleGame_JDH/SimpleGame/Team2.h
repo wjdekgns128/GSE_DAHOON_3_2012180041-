@@ -5,19 +5,12 @@
 class Team2 : public Team
 {
 protected:
-	int   selectScale;
-	float	selectTimer;
-	float selectR_Color[3];
+	
 public:
 	Team2()
 	{
 	
 
-		selectScale = 1;
-		selectTimer = 0.0f;
-		selectR_Color[0] = 1.0f;
-		selectR_Color[1] = 0;
-		selectR_Color[2] = 0;
 
 		tag = TEAMTAG::TEAM_2;
 		TeamTimer = 0.0f;

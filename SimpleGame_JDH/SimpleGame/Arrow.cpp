@@ -5,6 +5,7 @@ void Arrow::Update(float timer)
 {
 	if (state != 1)
 		return;
+
 	dietimer += timer;
 	vec += (moveVector * timer * speed);
 	if (vec.x <= -250 + size / 2 || vec.x >= 250 - size / 2)
