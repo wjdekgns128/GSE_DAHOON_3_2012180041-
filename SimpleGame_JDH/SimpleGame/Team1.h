@@ -22,9 +22,9 @@ public:
 				100, 700.0f, 999999);
 
 		}
-		createTimer[0] = CREATECHARACHTER - 0.5f;
-		createTimer[1] = CREATEARROWCHARACHTER - 0.5f;
-		createTimer[2] = CREATEDEFENSECHARACHTER -0.5f;
+		createTimer[0] = CREATECHARACHTER - 0.1f;
+		createTimer[1] = CREATEARROWCHARACHTER - 0.1f;
+		createTimer[2] = CREATEDEFENSECHARACHTER -0.1f;
 	
 	}
 	~Team1()
